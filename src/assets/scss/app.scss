@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import "variables";
+
+* {
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-break: normal !important;
+  //white-space: nowrap;
+  //overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jm-main-background {
+  background: radial-gradient(
+    ellipse at bottom,
+    rgb(16, 52, 96),
+    rgb(24, 24, 48)
+  ) !important;
+}
+
+.app-title {
+  font-family: "Open Sans Condensed";
+}
+
+.bg-blur {
+  backdrop-filter: blur(2rem) !important;
+}
+
+.jm-light-border {
+  border: solid 1px whitesmoke !important;
+  box-shadow: 0 0 0.7rem -0.2rem #fff !important;
+}
+
+.jm-bg-cards {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.jm-card-title {
+  font-family: "Roboto Condensed", sans-serif !important;
+}
