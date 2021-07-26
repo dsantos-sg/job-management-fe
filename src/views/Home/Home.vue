@@ -1,27 +1,23 @@
 <template>
-  <div>
-    <jm-simple-indicator />
-    <jm-icon-progress-indicator />
-    <jm-number-progress-indicator />
-    <jm-carousel-job-cards />
-    <new-job />
-  </div>
+  <v-container>
+    <jm-main-card>
+      <jm-dashboard />
+      <v-divider />
+      <jm-carousel-job-cards />
+    </jm-main-card>
+  </v-container>
 </template>
 
 <script>
-import JmSimpleIndicator from "@/components/JmSimpleIndicator/JmSimpleIndicator";
-import JmIconProgressIndicator from "@/components/JmIconProgressIndicator/JmIconProgressIndicator";
-import JmNumberProgressIndicator from "@/components/JmNumberProgressIndicator/JmNumberProgressIndicator";
 import JmCarouselJobCards from "@/components/JmCarouselJobCards/JmCarouselJobCards";
-import NewJob from "@/views/NewJob/NewJob";
+import JmDashboard from "@/components/JmDashboard/JmDashboard";
+import JmMainCard from "@/components/JmMainCard/JmMainCard";
 export default {
   name: "Home",
   components: {
-    NewJob,
+    JmMainCard,
+    JmDashboard,
     JmCarouselJobCards,
-    JmNumberProgressIndicator,
-    JmIconProgressIndicator,
-    JmSimpleIndicator,
   },
 };
 </script>

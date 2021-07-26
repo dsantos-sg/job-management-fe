@@ -1,4 +1,4 @@
-# job-management-fe-v2
+# job-management-fe
 
 ## Project setup
 ```

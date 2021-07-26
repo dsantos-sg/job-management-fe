@@ -9,17 +9,17 @@
     >
       <v-tabs-slider></v-tabs-slider>
 
-      <v-tab href="#tab-1">
+      <v-tab href="#tab-1" to="/home">
         Home
         <v-icon>mdi-home</v-icon>
       </v-tab>
 
-      <v-tab href="#tab-2">
+      <v-tab href="#tab-2" to="/new">
         Add a new job
         <v-icon>mdi-plus-box</v-icon>
       </v-tab>
 
-      <v-tab href="#tab-3">
+      <v-tab href="#tab-3" to="/registered-jobs">
         Registered jobs
         <v-icon>mdi-format-list-bulleted</v-icon>
       </v-tab>

@@ -1,48 +1,51 @@
 <template>
   <v-app class="jm-main-background">
-    <v-container fluid>
-      <v-navigation-drawer
-        app
-        right
-        color="transparent"
-        absolute
-        dark
-        temporary
-        v-model="drawer"
-        width="80%"
-        class="bg-blur"
-      >
-      </v-navigation-drawer>
-      <v-app-bar app fixed flat dark color="transparent" class="bg-blur">
-        <jm-logo />
-        <v-spacer />
-        <jm-main-toolbar />
-        <v-app-bar-nav-icon
-          class="my-auto hidden-lg-and-up"
-          @click.stop="drawer = !drawer"
-        />
-      </v-app-bar>
-      <v-main class="mb-10">
-        <div>
-          <JmBreadcrumbs class="my-1" />
-          <v-divider dark />
-        </div>
-        <v-row class="d-flex justify-center mt-3">
-          <v-col xl="4" lg="6" md="12">
-            <JmSearchItems />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-fade-transition mode="out-in">
-            <v-container>
-              <jm-main-card>
-                <router-view />
-              </jm-main-card>
+    <v-container class="fill-height" fluid>
+      <header v-if="loggedIn">
+        <v-navigation-drawer
+          app
+          right
+          color="transparent"
+          absolute
+          dark
+          temporary
+          v-model="drawer"
+          width="80%"
+          class="bg-blur"
+        >
+        </v-navigation-drawer>
+        <v-app-bar app prominent fixed flat dark class="bg-blur">
+          <jm-logo />
+          <v-spacer />
+          <jm-main-toolbar />
+          <v-app-bar-nav-icon
+            class="my-auto hidden-lg-and-up"
+            @click.stop="drawer = !drawer"
+          />
+          <template v-slot:extension>
+            <v-container fluid>
+              <v-row>
+                <v-col class="mt-sm-n12" sm="12" md="3">
+                  <JmBreadcrumbs />
+                </v-col>
+                <v-col class="mt-sm-n4 px-16" sm="12" md="6">
+                  <JmSearchItems />
+                </v-col>
+              </v-row>
             </v-container>
+          </template>
+        </v-app-bar>
+      </header>
+      <v-main class="my-10">
+        <v-container>
+          <!--          <jm-main-card>-->
+          <v-fade-transition mode="out-in">
+            <router-view />
           </v-fade-transition>
-        </v-row>
+          <!--          </jm-main-card>-->
+        </v-container>
       </v-main>
-      <jm-main-app-footer  />
+      <jm-main-app-footer />
     </v-container>
   </v-app>
 </template>
@@ -52,13 +55,13 @@ import JmBreadcrumbs from "@/components/JmBreadcrumbs/JmBreadcrumbs";
 import JmSearchItems from "@/components/JmSearchItems/JmSearchItems";
 import JmMainToolbar from "@/components/JmMainToolbar/JmMainToolbar";
 import JmLogo from "@/components/JmLogo/JmLogo";
-import JmMainCard from "@/components/JmMainCard/JmMainCard";
+// import JmMainCard from "@/components/JmMainCard/JmMainCard";
 import JmMainAppFooter from "@/components/JmMainAppFooter/JmMainAppFooter";
 export default {
   name: "App",
   components: {
     JmMainAppFooter,
-    JmMainCard,
+    // JmMainCard,
     JmLogo,
     JmMainToolbar,
     JmSearchItems,
@@ -67,6 +70,7 @@ export default {
   data() {
     return {
       drawer: false,
+      loggedIn: true,
     };
   },
 };

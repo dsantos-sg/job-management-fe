@@ -1,13 +1,15 @@
 <template>
-  <v-footer outlined class="bg-blur" dark color="transparent" app fixed>
+  <v-footer class="bg-blur" dark app fixed>
     <v-container class="d-flex">
       <div class="d-flex">
-        <h1 class="subtitle-1 text--primary">Terms</h1>
-        <h1 class="subtitle-1 text--primary ml-3">Privacy</h1>
+        <h1 class="text-body-1 font-weight-light text--white">Terms</h1>
+        <h1 class="text-body-1 font-weight-light text--white ml-3">Privacy</h1>
       </div>
       <v-spacer />
       <div>
-        <h1 class="text--primary subtitle-1">Daniel Santos © 2021</h1>
+        <h1 class="text-body-1 font-weight-light text--white">
+          Daniel Santos © 2021
+        </h1>
       </div>
     </v-container>
   </v-footer>
