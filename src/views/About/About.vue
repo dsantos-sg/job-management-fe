@@ -102,6 +102,7 @@ export default {
       techStacks: [
         "VueJS",
         "Vuetify",
+        "Sass",
         "Npm (NodeJS)",
         "Java",
         "Springboot",
