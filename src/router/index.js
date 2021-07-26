@@ -46,6 +46,18 @@ const routes = [
         /* webpackChunkName: "group" */ "../views/LandingPage/LandingPage"
       ),
   },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: () =>
+      import(/* webpackChunkName: "group" */ "../views/Settings/Settings"),
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: () =>
+      import(/* webpackChunkName: "group" */ "../views/About/About"),
+  },
 ];
 
 const router = new VueRouter({

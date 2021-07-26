@@ -23,15 +23,15 @@
         Registered jobs
         <v-icon>mdi-format-list-bulleted</v-icon>
       </v-tab>
-      <v-tab href="#tab-4">
+      <v-tab href="#tab-4" to="/settings">
         Settings
         <v-icon>mdi-cog</v-icon>
       </v-tab>
-      <v-tab href="#tab-5">
+      <v-tab href="#tab-5" to="/about">
         About
         <v-icon>mdi-information</v-icon>
       </v-tab>
-      <v-tab href="#tab-6">
+      <v-tab href="#tab-6" to="/">
         Logout
         <v-icon>mdi-exit-to-app</v-icon>
       </v-tab>

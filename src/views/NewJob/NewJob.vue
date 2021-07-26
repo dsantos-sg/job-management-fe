@@ -74,8 +74,8 @@
           <v-col cols="12">
             <v-card-actions>
               <v-spacer />
-              <v-btn outlined width="100">Cancel</v-btn>
-              <v-btn @click="submit" color="primary" width="100">Save</v-btn>
+              <v-btn to="/home" outlined width="100">Cancel</v-btn>
+              <v-btn to="/home" color="primary" width="100">Save</v-btn>
             </v-card-actions>
           </v-col>
         </v-row>
