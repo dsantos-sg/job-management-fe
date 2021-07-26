@@ -1,6 +1,6 @@
 # job-management-fe
 
-Front end developed in VueJS 2.0 with Vuetify plugin.
+# Front end developed in VueJS 2.0 with Vuetify plugin.
 
 ## Project setup
 ```
