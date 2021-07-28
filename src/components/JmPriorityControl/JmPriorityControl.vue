@@ -1,5 +1,5 @@
 <template>
-  <v-alert outlined color="grey" class="mb-7">
+  <v-alert outlined rounded="xl" color="grey" class="mb-7">
     <!-- TODO Remover item -->
     <v-card outlined color="transparent">
       <h1 class="body-1">Priority</h1>

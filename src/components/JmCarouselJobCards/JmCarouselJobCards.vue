@@ -7,7 +7,6 @@
       <v-slide-group
         v-model="model"
         class="px-4"
-        active-class="success"
         show-arrows
         center-active
         mandatory
@@ -16,20 +15,13 @@
         value="4"
       >
         <v-slide-item
-          class="green"
           v-for="n in totalCards"
           :key="n"
           v-slot="{ active, toggle }"
         >
-          <v-card
-            :color="active ? undefined : 'blue lighten-1'"
-            class="ma-15"
-            @click="toggle"
-          >
+          <v-card color="transparent" flat @click="toggle" class="ma-8">
             <v-row class="fill-height" align="center" justify="center">
-              <v-scale-transition>
-                <job-card />
-              </v-scale-transition>
+              <job-card />
             </v-row>
           </v-card>
         </v-slide-item>
@@ -40,6 +32,7 @@
 
 <script>
 import JobCard from "@/components/JobCard/JobCard";
+
 export default {
   name: "JmCarouselJobCards",
   components: { JobCard },

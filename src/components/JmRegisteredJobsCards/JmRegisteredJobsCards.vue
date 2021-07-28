@@ -1,13 +1,25 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="n in totalCards" :key="n" cols="4">
+      <v-col
+        v-for="n in totalCards"
+        :key="n"
+        sm="12"
+        md="6"
+        lg="4"
+        xl="3"
+        class=""
+      >
         <v-item-group>
           <v-item v-slot="{ active, toggle }">
-            <v-card to="/job-detail" @click="selectedItem">
-              <v-card :color="active ? 'primary' : ''" @click="toggle">
-                <job-card />
-              </v-card>
+            <v-card
+              color="transparent"
+              rounded="xl"
+              flat
+              @click="toggle"
+              to="/job-detail"
+            >
+              <job-card />
             </v-card>
           </v-item>
         </v-item-group>
@@ -18,6 +30,7 @@
 
 <script>
 import JobCard from "@/components/JobCard/JobCard";
+
 export default {
   name: "JmRegisteredJobsCards",
   components: { JobCard },

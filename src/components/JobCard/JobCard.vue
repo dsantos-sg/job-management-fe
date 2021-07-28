@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="12" max-width="400">
+  <v-card outlined elevation="10" rounded="xl" max-width="400">
     <v-container>
       <div flat class="d-flex">
         <h1 class="title text-ellipse">Technischer Produktdesigner (m/w)</h1>
@@ -37,7 +37,6 @@
         </div>
       </div>
       <v-divider class="mt-2" />
-
       <div class="d-flex align-end mt-3">
         <div>
           <h1 class="display-1">NO</h1>

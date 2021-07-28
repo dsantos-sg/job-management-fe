@@ -1,20 +1,20 @@
 <template>
-  <v-card flat color="transparent">
+  <v-container>
+    <v-card-title class="justify-center mt-5">
+      <h2 class="font-weight-light">Overview</h2>
+    </v-card-title>
     <v-container>
-      <v-card-title class="justify-center mb-5">
-        <h2 class="font-weight-light">Overview</h2>
-      </v-card-title>
       <v-row class="d-flex justify-center">
         <v-col xl="2" lg="2" md="2" sm="12">
           <jm-simple-indicator
             indicator-icon="mdi-text-box-check"
-            indicator-title="Registered jobs"
+            indicator-title="Jobs"
           />
         </v-col>
         <v-col xl="2" lg="2" md="2" sm="12">
           <jm-icon-progress-indicator
             progress-value="30"
-            indicator-title="Application sent"
+            indicator-title="Sent"
             indicator-icon="mdi-file-send"
             indicator-value="9"
           />
@@ -22,7 +22,7 @@
         <v-col xl="2" lg="2" md="2" sm="12">
           <jm-icon-progress-indicator
             progress-value="10"
-            indicator-title="Company feedback"
+            indicator-title="Feedback"
             indicator-icon="mdi-phone-incoming"
             indicator-value="4"
           />
@@ -30,7 +30,7 @@
         <v-col xl="2" lg="2" md="2" sm="12">
           <jm-icon-progress-indicator
             progress-value="15"
-            indicator-title="Scheduled interview"
+            indicator-title="Interview"
             indicator-icon="mdi-calendar-cursor"
             indicator-value="3"
           />
@@ -38,7 +38,7 @@
         <v-col xl="2" lg="2" md="2" sm="12">
           <jm-icon-progress-indicator
             progress-value="30"
-            indicator-title="Rejected application"
+            indicator-title="Rejected"
             indicator-icon="mdi-account-cancel"
             indicator-value="6"
           />
@@ -46,7 +46,7 @@
       </v-row>
     </v-container>
     <v-divider />
-    <v-container class="my-10">
+    <v-container class="mt-5">
       <v-card-title class="justify-center">
         <h2 class="font-weight-light mt-5">Next interviews</h2>
       </v-card-title>
@@ -74,13 +74,14 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-card>
+  </v-container>
 </template>
 
 <script>
 import JmSimpleIndicator from "@/components/JmSimpleIndicator/JmSimpleIndicator";
 import JmIconProgressIndicator from "@/components/JmIconProgressIndicator/JmIconProgressIndicator";
 import JmNumberProgressIndicator from "@/components/JmNumberProgressIndicator/JmNumberProgressIndicator";
+
 export default {
   name: "JmDashboard",
   components: {

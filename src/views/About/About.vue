@@ -9,7 +9,7 @@
           <v-row>
             <v-col>
               <v-card-title class="justify-center">
-                <jm-logo />
+                <jm-logo logo-style="light" logo-size="64" />
               </v-card-title>
               <v-card-subtitle class="d-flex justify-center">
                 <h3 class="font-weight-regular">

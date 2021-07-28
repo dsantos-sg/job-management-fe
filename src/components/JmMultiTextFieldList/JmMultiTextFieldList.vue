@@ -1,29 +1,30 @@
 <template>
-  <v-alert outlined color="grey" class="mb-8 pt-8 px-5">
+  <v-alert outlined rounded="xl" color="grey" class="mb-8 pt-8 px-5">
     <div class="d-flex justify-space-between">
       <v-text-field
         v-model="newItem"
         :label="itemName"
         outlined
         clearable
+        rounded
         @blur="addNewItem"
         @keyup.enter="addNewItem"
+        append-icon="mdi-plus-box"
+        @click:append="addNewItem"
       ></v-text-field>
-      <!--      <v-btn fab plain @click="addNewItem()">-->
-      <!--        <v-icon size="32">mdi-plus-box</v-icon>-->
-      <!--      </v-btn>-->
     </div>
-    <v-list nav dense flat class="d-flex">
+    <v-list nav dense color="transparent" flat class="d-flex">
       <v-list-item-group color="primary">
         <v-list-item v-for="(item, index) in listItems" :key="index" dense>
-          <v-dialog v-model="dialog" persistent max-width="290">
-            <v-card>
-              <v-card-title class="text-h5">
-                {{ setItem }}
+          <v-dialog v-model="dialog" persistent max-width="300">
+            <v-card flat rounded="xl">
+              <v-card-title>
+                <h2 class="font-weight-light">{{ setItem }}</h2>
               </v-card-title>
-              <v-card-text>
+              <v-card-text class="mt-5">
                 <v-text-field
-                  dense
+                  outlined
+                  rounded
                   :placeholder="setItem"
                   v-model="newItem"
                   @keyup.enter="updateThisItem"
@@ -38,8 +39,8 @@
                   Save
                 </v-btn>
               </v-card-actions>
-            </v-card></v-dialog
-          >
+            </v-card>
+          </v-dialog>
           <v-text-field
             readonly
             dense
@@ -52,7 +53,6 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
-    <!--    <v-btn @click="updateWithEmit">update</v-btn>-->
   </v-alert>
 </template>
 

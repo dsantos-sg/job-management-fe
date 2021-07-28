@@ -1,13 +1,23 @@
 <template>
   <v-container>
-    <v-toolbar dense flat>
+    <v-toolbar color="transparent" dense flat>
       <v-btn-toggle dense group tile borderless mandatory>
-        <v-btn @click="setGridView">
-          <v-icon>mdi-view-grid</v-icon>
-        </v-btn>
-        <v-btn @click="setListView">
-          <v-icon>mdi-format-list-bulleted</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" @click="setGridView">
+              <v-icon>mdi-view-grid</v-icon>
+            </v-btn>
+          </template>
+          <span>Grid view</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" @click="setListView">
+              <v-icon>mdi-format-list-bulleted</v-icon>
+            </v-btn>
+          </template>
+          <span>List view</span>
+        </v-tooltip>
       </v-btn-toggle>
       <v-spacer />
       <div class="mr-3">

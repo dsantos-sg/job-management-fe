@@ -7,6 +7,7 @@
     hint="Maximum of 25 tags"
     persistent-hint
     outlined
+    rounded
     multiple
     small-chips
     clearable
