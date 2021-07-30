@@ -1,15 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col
-        v-for="n in totalCards"
-        :key="n"
-        sm="12"
-        md="6"
-        lg="4"
-        xl="3"
-        class=""
-      >
+      <v-col v-for="n in totalCards" :key="n" sm="12" md="6" lg="4" xl="3">
         <v-item-group>
           <v-item v-slot="{ active, toggle }">
             <v-card

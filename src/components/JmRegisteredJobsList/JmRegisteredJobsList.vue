@@ -1,18 +1,14 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card elevation="10" rounded="xl">
       <v-card-title>
-        Registered jobs
-        <v-spacer></v-spacer>
-      </v-card-title>
-      <v-card-subtitle>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"
           single-line
         ></v-text-field>
-      </v-card-subtitle>
+      </v-card-title>
       <v-data-table
         :headers="headers"
         :items="jobs"

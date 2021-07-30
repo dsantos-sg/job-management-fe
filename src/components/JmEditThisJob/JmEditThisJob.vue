@@ -2,10 +2,11 @@
   <v-dialog
     transition="dialog-bottom-transition"
     max-width="996"
+    max
     v-model="setEditItem"
     persistent
   >
-    <v-card elevation="12">
+    <v-card tile class="jm-bg-cards bg-blur" min-height="1080" elevation="12">
       <v-tabs
         v-model="tab"
         centered
@@ -13,6 +14,7 @@
         center-active
         show-arrows
         color="primary"
+        background-color="transparent"
       >
         <v-tab>
           <v-icon left> mdi-tools</v-icon>
@@ -41,105 +43,85 @@
         <v-tabs-items class="transparent" v-model="tab">
           <!-- JOB DESCRIPTION ------------------------------------------------------------------------------------------>
           <v-tab-item>
-            <v-container class="fill-height">
-              <v-card flat width="100%">
-                <job-description-form />
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn plain color="primary" @click="tab = 1">
-                    Next
-                    <v-icon>mdi-chevron-right</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-container>
+            <job-description-form />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn plain color="primary" @click="tab = 1">
+                Next
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-tab-item>
           <!-- COMPANY -------------------------------------------------------------------------------------------------->
           <v-tab-item>
-            <v-container class="fill-height">
-              <v-card flat width="100%">
-                <job-company-form />
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn plain color="primary" @click="tab = 0">
-                    <v-icon>mdi-chevron-left</v-icon>
-                    Back
-                  </v-btn>
-                  <v-btn plain color="primary" @click="tab = 2">
-                    Next
-                    <v-icon>mdi-chevron-right</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-container>
+            <job-company-form />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn plain color="primary" @click="tab = 0">
+                <v-icon>mdi-chevron-left</v-icon>
+                Back
+              </v-btn>
+              <v-btn plain color="primary" @click="tab = 2">
+                Next
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-tab-item>
           <!-- CONTACTS ------------------------------------------------------------------------------------------------->
           <v-tab-item>
-            <v-container class="fill-height">
-              <v-card flat width="100%">
-                <job-contact-form />
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn plain color="primary" @click="tab = 1">
-                    <v-icon>mdi-chevron-left</v-icon>
-                    Back
-                  </v-btn>
-                  <v-btn plain color="primary" @click="tab = 3">
-                    Next
-                    <v-icon>mdi-chevron-right</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-container>
+            <job-contact-form />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn plain color="primary" @click="tab = 1">
+                <v-icon>mdi-chevron-left</v-icon>
+                Back
+              </v-btn>
+              <v-btn plain color="primary" @click="tab = 3">
+                Next
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-tab-item>
           <!-- APPLICATION ---------------------------------------------------------------------------------------------->
           <v-tab-item>
-            <v-container class="fill-height">
-              <v-card flat width="100%">
-                <jm-job-application />
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn plain color="primary" @click="tab = 2">
-                    <v-icon>mdi-chevron-left</v-icon>
-                    Back
-                  </v-btn>
-                  <v-btn plain color="primary" @click="tab = 4">
-                    Next
-                    <v-icon>mdi-chevron-right</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-container>
+            <jm-job-application />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn plain color="primary" @click="tab = 2">
+                <v-icon>mdi-chevron-left</v-icon>
+                Back
+              </v-btn>
+              <v-btn plain color="primary" @click="tab = 4">
+                Next
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-tab-item>
           <!-- INTERVIEW ------------------------------------------------------------------------------------------------>
           <v-tab-item>
-            <v-container>
-              <jm-interviews />
-              <v-card-actions>
-                <v-spacer />
-                <v-btn plain color="primary" @click="tab = 3">
-                  <v-icon>mdi-chevron-left</v-icon>
-                  Back
-                </v-btn>
-                <v-btn plain color="primary" @click="tab = 5">
-                  Next
-                  <v-icon>mdi-chevron-right</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </v-container>
+            <jm-interviews />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn plain color="primary" @click="tab = 3">
+                <v-icon>mdi-chevron-left</v-icon>
+                Back
+              </v-btn>
+              <v-btn plain color="primary" @click="tab = 5">
+                Next
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-tab-item>
           <!-- FOLLOW-UP ------------------------------------------------------------------------------------------------>
           <v-tab-item>
-            <v-container>
-              <jm-follow-up />
-              <v-card-actions>
-                <v-spacer />
-                <v-btn plain color="primary" @click="tab = 4">
-                  <v-icon>mdi-chevron-left</v-icon>
-                  Back
-                </v-btn>
-              </v-card-actions>
-            </v-container>
+            <jm-follow-up />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn plain color="primary" @click="tab = 4">
+                <v-icon>mdi-chevron-left</v-icon>
+                Back
+              </v-btn>
+            </v-card-actions>
           </v-tab-item>
         </v-tabs-items>
       </v-tabs>

@@ -1,8 +1,5 @@
 <template>
   <v-container>
-    <v-card-title class="justify-center mt-5">
-      <h2 class="font-weight-light">Overview</h2>
-    </v-card-title>
     <v-container>
       <v-row class="d-flex justify-center">
         <v-col xl="2" lg="2" md="2" sm="12">

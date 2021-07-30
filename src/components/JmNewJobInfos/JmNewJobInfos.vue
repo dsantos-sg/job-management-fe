@@ -1,8 +1,5 @@
 <template>
-  <v-container class="mt-5">
-    <v-card-title class="justify-center mb-5">
-      <h2 class="font-weight-light">Add a new job</h2>
-    </v-card-title>
+  <v-container>
     <v-tabs
       v-model="tab"
       centered

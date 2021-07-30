@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-card-title class="justify-center my-5">
+      <h2 class="font-weight-light">Overview</h2>
+    </v-card-title>
     <jm-dashboard />
     <v-divider />
     <jm-carousel-job-cards />

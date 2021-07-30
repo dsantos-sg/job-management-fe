@@ -9,7 +9,9 @@
         :value="formattedDatetime"
         v-on="on"
         readonly
+        rounded
         outlined
+        clearable
       >
         <template v-slot:progress>
           <slot name="progress">

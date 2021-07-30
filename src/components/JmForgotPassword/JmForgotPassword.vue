@@ -1,8 +1,8 @@
 <template>
-  <v-dialog max-width="500" v-model="setEditItem" persistent>
+  <v-dialog max-width="600" v-model="setEditItem" persistent>
     <v-card rounded="xl" outlined class="pa-5" elevation="12">
       <v-card-title>
-        <h3 class="font-weight-regular">Please, type here your email.</h3>
+        <h3 class="font-weight-regular mb-8">Please, type here your email.</h3>
       </v-card-title>
       <v-card-text>
         <v-text-field
@@ -14,11 +14,14 @@
         ></v-text-field>
       </v-card-text>
       <v-card-actions class="justify-center">
+        <v-btn rounded large color="secondary" width="120" @click="closeDialog"
+          >Cancel
+        </v-btn>
         <v-btn
           color="primary"
           rounded
           large
-          width="150"
+          width="120"
           @click="confirmEmailDialog"
           >Reset
         </v-btn>

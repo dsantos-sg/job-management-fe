@@ -1,6 +1,6 @@
 <template>
-  <v-container class="mt-5">
-    <v-card-title class="justify-center mb-5">
+  <v-container>
+    <v-card-title class="justify-center my-5">
       <h2 class="font-weight-light">Registered jobs</h2>
     </v-card-title>
     <jm-registered-job-toolbar @setView="viewStyle = $event" />

@@ -1,13 +1,16 @@
 <template>
   <v-app class="jm-main-background">
-    <jm-main-header />
+    <jm-main-header v-if="loggedIn" />
     <v-main class="my-10">
       <v-container class="fill-height">
-        <jm-main-card>
+        <jm-main-card v-if="loggedIn">
           <v-fade-transition>
             <router-view />
           </v-fade-transition>
         </jm-main-card>
+        <v-fade-transition v-else>
+          <router-view />
+        </v-fade-transition>
       </v-container>
     </v-main>
     <jm-main-app-footer />
@@ -25,6 +28,11 @@ export default {
     JmMainCard,
     JmMainHeader,
     JmMainAppFooter,
+  },
+  data() {
+    return {
+      loggedIn: true,
+    };
   },
 };
 </script>
