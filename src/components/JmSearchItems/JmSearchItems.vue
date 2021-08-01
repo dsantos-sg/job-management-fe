@@ -1,6 +1,7 @@
 <template>
   <v-form onsubmit="prevent()">
     <v-text-field
+      dense
       rounded
       dark
       outlined

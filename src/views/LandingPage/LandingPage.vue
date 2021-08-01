@@ -38,5 +38,13 @@ import JmLogo from "@/components/JmLogo/JmLogo";
 export default {
   name: "LandingPage",
   components: { JmLogo },
+  methods: {
+    setLogout() {
+      this.$store.commit("SET_LOGOUT");
+    },
+  },
+  mounted() {
+    this.setLogout();
+  },
 };
 </script>

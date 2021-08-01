@@ -19,6 +19,14 @@ export default {
     JmDashboard,
     JmCarouselJobCards,
   },
+  methods: {
+    setLogin() {
+      this.$store.commit("SET_LOGIN");
+    },
+  },
+  mounted() {
+    this.setLogin();
+  },
 };
 </script>
 

@@ -14,41 +14,43 @@
                 <v-card-title class="justify-center">
                   <h1 class="font-weight-light mb-8">Sign-in</h1>
                 </v-card-title>
-                <v-text-field
-                  label="E-mail"
-                  placeholder="name@mail.com"
-                  outlined
-                  clearable
-                  rounded
-                ></v-text-field>
-                <v-text-field
-                  label="Password"
-                  type="password"
-                  outlined
-                  rounded="lg"
-                  clearable
-                ></v-text-field>
-                <a class="justify-center" plain @click.stop="forgotPassword">
-                  <h4 class="grey--text font-weight-regular">
-                    Forgot your password?
-                  </h4>
-                </a>
-                <v-card-actions class="py-5">
-                  <v-spacer />
-                  <v-btn
-                    block
-                    rounded="pill"
-                    elevation="0"
-                    large
-                    color="primary"
-                    to="/home"
-                  >
-                    <span class="mr-1">Sign-in</span>
-                    <v-icon> mdi-play</v-icon>
-                  </v-btn>
-                  <v-spacer />
-                </v-card-actions>
-                <a @click.stop="newUser">New user? Please, register here.</a>
+                <v-form>
+                  <v-text-field
+                    label="E-mail"
+                    placeholder="name@mail.com"
+                    outlined
+                    clearable
+                    rounded
+                  ></v-text-field>
+                  <v-text-field
+                    label="Password"
+                    type="password"
+                    outlined
+                    rounded
+                    clearable
+                  ></v-text-field>
+                  <a class="justify-center" plain @click.stop="forgotPassword">
+                    <h4 class="grey--text font-weight-regular">
+                      Forgot your password?
+                    </h4>
+                  </a>
+                  <v-card-actions class="py-5">
+                    <v-spacer />
+                    <v-btn
+                      block
+                      rounded
+                      elevation="0"
+                      large
+                      color="primary"
+                      to="/home"
+                    >
+                      <span class="mr-1">Sign-in</span>
+                      <v-icon> mdi-play</v-icon>
+                    </v-btn>
+                    <v-spacer />
+                  </v-card-actions>
+                  <a @click.stop="newUser">New user? Please, register here.</a>
+                </v-form>
               </v-col>
             </v-row>
           </v-container>
@@ -87,6 +89,9 @@ export default {
     newUser() {
       this.setNewUser = !this.setNewUser;
     },
+    // loggedIn() {
+    //   this.$store.commit("SET_LOGIN");
+    // },
   },
 };
 </script>
