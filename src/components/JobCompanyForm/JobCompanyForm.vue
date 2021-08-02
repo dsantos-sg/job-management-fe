@@ -11,21 +11,31 @@
         <v-card elevation="10" rounded="xl">
           <v-card-text class="mt-3">
             <v-text-field
+              v-model="newJobCompany.companyName"
               label="Company name"
               placeholder="Company Name"
               outlined
               rounded
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
+              v-model="newJobCompany.webSite"
               label="Website"
               placeholder="Web-site"
               outlined
               rounded
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
-            <jm-multi-text-field-list item-name="Phone" />
-            <jm-multi-text-field-list item-name="Email" />
+            <jm-multi-text-field-list
+              item-name="Phone"
+              @getListItems="newJobCompany.phone = $event"
+            />
+            <jm-multi-text-field-list
+              item-name="Email"
+              @getListItems="newJobCompany.email = $event"
+            />
             <v-text-field
               label="Address"
               placeholder="Address"
@@ -34,6 +44,7 @@
               clearable
             ></v-text-field>
             <v-text-field
+              v-model="newJobCompany.distanceFromHome"
               label="Distance from Home"
               placeholder="Distance from Home"
               outlined
@@ -41,6 +52,7 @@
               clearable
             ></v-text-field>
             <v-textarea
+              v-model="newJobCompany.aboutUs"
               outlined
               clearable
               auto-grow
@@ -48,8 +60,10 @@
               rows="6"
               label="About us"
               name="AboutUs"
+              @blur="updateWithEmit"
             ></v-textarea>
             <v-textarea
+              v-model="newJobCompany.additionalInfos"
               outlined
               clearable
               auto-grow
@@ -57,6 +71,7 @@
               rows="4"
               label="Additional infos"
               name="AdditionalInfos"
+              @blur="updateWithEmit"
             ></v-textarea>
           </v-card-text>
         </v-card>
@@ -71,6 +86,29 @@ import JmMultiTextFieldList from "@/components/JmMultiTextFieldList/JmMultiTextF
 export default {
   name: "JobCompanyForm",
   components: { JmMultiTextFieldList },
+  data() {
+    return {
+      newJobCompany: {
+        companyName: "",
+        webSite: "",
+        phone: "",
+        email: "",
+        geospatialData: {
+          type: "Point",
+          coordinates: [48.69548, 8.99777],
+        },
+        distanceFromHome: "",
+        aboutUs: "",
+        additionalInfos: "",
+      },
+    };
+  },
+  methods: {
+    updateWithEmit() {
+      this.$emit("setNewCompany", this.newJobCompany);
+      console.log("company emit");
+    },
+  },
 };
 </script>
 

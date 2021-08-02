@@ -22,7 +22,7 @@
         <!--        >-->
         <!--          {{ job }}-->
         <!--        </v-card>-->
-        <!--  ------------------    -->
+        <!--        &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
       </v-container>
     </v-main>
     <!--    <jm-main-app-footer />-->
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 // import JmMainAppFooter from "@/components/JmMainAppFooter/JmMainAppFooter";
 import JmMainHeader from "@/components/JmMainHeader/JmMainHeader";
 import JmMainCard from "@/components/JmMainCard/JmMainCard";
@@ -45,8 +45,8 @@ export default {
   mounted() {
     this.$store.dispatch("loadJobsData");
   },
-  computed: {
-    ...mapState(["jobs"]),
-  },
+  // computed: {
+  //   ...mapState(["jobs"]),
+  // },
 };
 </script>

@@ -11,7 +11,7 @@
         <v-card
           elevation="10"
           rounded="xl"
-          v-for="(item, index) in contacts"
+          v-for="(item, index) in newJobContact.contacts"
           :key="index"
           class="mb-8"
         >
@@ -28,29 +28,34 @@
               outlined
               rounded
               clearable
-              v-model="contacts[index].firstName"
+              v-model="newJobContact.contacts[index].firstName"
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
               label="Last name"
-              v-model="contacts[index].lastName"
+              v-model="newJobContact.contacts[index].lastName"
               rounded
               outlined
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
               label="Role"
-              v-model="contacts[index].role"
+              v-model="newJobContact.contacts[index].role"
               rounded
               outlined
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <jm-multi-text-field-list
               item-name="Phone"
-              @getListItems="contacts[index].phone = $event"
+              @getListItems="newJobContact.contacts[index].phone = $event"
+              @change="updateWithEmit"
             />
             <jm-multi-text-field-list
               item-name="Email"
-              @getListItems="contacts[index].email = $event"
+              @getListItems="newJobContact.contacts[index].email = $event"
+              @change="updateWithEmit"
             />
             <v-textarea
               outlined
@@ -58,9 +63,10 @@
               auto-grow
               rounded
               rows="4"
-              v-model="contacts[index].additionalInfo"
+              v-model="newJobContact.contacts[index].additionalInfo"
               label="Additional infos"
               name="AdditionalInfos"
+              @blur="updateWithEmit"
             ></v-textarea>
           </v-card-text>
         </v-card>
@@ -89,28 +95,33 @@ export default {
   components: { JmMultiTextFieldList },
   data() {
     return {
-      contacts: [
-        {
-          firstName: "",
-          lastName: "",
-          role: "",
-          phone: "",
-          email: "",
-          additionalInfo: "",
-        },
-      ],
+      newJobContact: {
+        contacts: [
+          {
+            firstName: "",
+            lastName: "",
+            role: "",
+            phone: "",
+            email: "",
+            additionalInfo: "",
+          },
+        ],
+      },
       dialog: false,
-      // childPhone: [],
     };
   },
   methods: {
     addNewContact() {
-      const newContact = new Object();
-      this.contacts.push(newContact);
+      const newContact = {};
+      this.newJobContact.contacts.push(newContact);
     },
     removeThisContact(index) {
       alert("Remove this contact");
-      this.contacts.splice(index, 1);
+      this.newJobContact.contacts.splice(index, 1);
+    },
+    updateWithEmit() {
+      this.$emit("setNewJobContact", this.newJobContact);
+      console.log("job contact emit");
     },
   },
 };

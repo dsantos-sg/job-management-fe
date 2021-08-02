@@ -99,7 +99,10 @@
                 </v-tooltip>
               </v-card>
               <v-card-subtitle class="ml-n5 mt-3 mb-n5">Status</v-card-subtitle>
-              <v-radio-group v-model="status">
+              <v-radio-group
+                v-model="newJobFollowUp.status"
+                @blur="updateWithEmit"
+              >
                 <v-radio label="In progress" />
                 <v-radio label="Approved" />
                 <v-radio label="Rejected" />
@@ -109,14 +112,14 @@
             <v-dialog
               ref="dialog"
               v-model="modal"
-              :return-value.sync="firstCompanyFeedback"
+              :return-value.sync="newJobFollowUp.companyFeedbackDate"
               persistent
               width="290px"
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   outlined
-                  v-model="firstCompanyFeedback"
+                  v-model="newJobFollowUp.companyFeedbackDate"
                   label="First company feedback"
                   readonly
                   v-bind="attrs"
@@ -126,9 +129,13 @@
                   hint="25 days without a company feedback"
                   persistent-hint
                   class="my-5"
+                  @blur="updateWithEmit"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="firstCompanyFeedback" scrollable>
+              <v-date-picker
+                v-model="newJobFollowUp.companyFeedbackDate"
+                scrollable
+              >
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="modal = false">
                   Cancel
@@ -136,46 +143,50 @@
                 <v-btn
                   text
                   color="primary"
-                  @click="$refs.dialog.save(firstCompanyFeedback)"
+                  @click="$refs.dialog.save(newJobFollowUp.companyFeedbackDate)"
                 >
                   OK
                 </v-btn>
               </v-date-picker>
             </v-dialog>
             <v-text-field
-              v-model="salaryOffer"
+              v-model="newJobFollowUp.salaryOffer"
               label="Salary Offer (Year)"
               placeholder="Salary Offer (Year)"
               outlined
               rounded
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
-              v-model="proposedSalary"
+              v-model="newJobFollowUp.proposedSalary"
               label="Proposed Salary (Year)"
               placeholder="Proposed Salary (Year)"
               outlined
               rounded
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
-              v-model="salaryDifference"
+              v-model="newJobFollowUp.salaryDifference"
               label="Difference"
               placeholder="Difference"
               outlined
               rounded
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-card flat class="mb-8">
               <v-alert outlined rounded="xl" color="grey">
                 <v-card-subtitle class="ml-n5 mt-n3">Rating</v-card-subtitle>
                 <v-rating
-                  v-model="jobRating"
+                  v-model="newJobFollowUp.rating"
                   color="grey darken-3"
                   background-color="grey darken-1"
                   hover
                   large
                   dense
+                  @blur="updateWithEmit"
                 ></v-rating>
               </v-alert>
             </v-card>
@@ -193,18 +204,21 @@
                   name="Comment"
                   append-outer-icon="mdi-send"
                   @click:append-outer="addNewComment"
+                  @blur="updateWithEmit"
                 />
                 <v-card
                   rounded="xl"
                   class="mb-10"
                   elevation="12"
-                  v-for="(item, index) in comments"
+                  v-for="(item, index) in newJobFollowUp.comments"
                   :key="index"
                 >
                   <v-card-subtitle>
                     <h3 class="font-weight-regular">
                       {{
-                        comments[index].commentDateTime.toString().substr(0, 24)
+                        newJobFollowUp.comments[index].commentDateTime
+                          .toString()
+                          .substr(0, 24)
                       }}
                     </h3>
                   </v-card-subtitle>
@@ -215,7 +229,7 @@
                       rows="1"
                       flat
                       readonly
-                      :value="comments[index].comment"
+                      :value="newJobFollowUp.comments[index].comment"
                     >
                     </v-textarea>
                   </v-card-text>
@@ -234,29 +248,35 @@ export default {
   name: "JmFollowUp",
   data() {
     return {
-      status: "",
-      firstCompanyFeedback: "",
       modal: false,
-      salaryOffer: "",
-      proposedSalary: "",
-      salaryDifference: "",
-      jobRating: "",
-      myLabel: Date().toString().substr(0, 10),
+      // myLabel: Date().toString().substr(0, 10),
+
+      newJobFollowUp: {
+        status: "",
+        companyFeedbackDate: "",
+        salaryOffer: "",
+        proposedSalary: "",
+        difference: "",
+        rating: 0,
+        comments: [],
+      },
       tempComment: {
         comment: "",
         commentDateTime: new Date(),
       },
-      comments: [],
     };
   },
   methods: {
     addNewComment() {
       if (this.tempComment.comment) {
-        this.comments.push(this.tempComment);
-        this.tempComment = new Object();
-        // this.tempComment.comment = "";
+        this.newJobFollowUp.comments.push(this.tempComment);
+        this.tempComment = {};
         this.tempComment.commentDateTime = new Date();
       }
+    },
+    updateWithEmit() {
+      this.$emit("setNewJobFollowUp", this.newJobFollowUp);
+      console.log("job followUp emit");
     },
   },
 };

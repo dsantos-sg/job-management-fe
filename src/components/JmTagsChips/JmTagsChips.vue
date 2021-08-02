@@ -1,16 +1,18 @@
 <template>
   <v-chip-group show-arrows center-active>
-    <v-chip outlined>Javascript</v-chip>
-    <v-chip outlined>HTML</v-chip>
-    <v-chip outlined>CSS3</v-chip>
-    <v-chip outlined>NodeJS</v-chip>
-    <v-chip outlined>Front-end</v-chip>
+    <v-chip v-for="(tag, index) in tags" :key="index">
+      <v-avatar left>
+        <v-icon>mdi-pound</v-icon>
+      </v-avatar>
+      {{ tag }}
+    </v-chip>
   </v-chip-group>
 </template>
 
 <script>
 export default {
   name: "JmTagsChips",
+  props: ["tags"],
 };
 </script>
 

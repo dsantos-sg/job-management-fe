@@ -29,12 +29,18 @@
 export default {
   name: "JmComboboxChips",
   props: ["comboboxLabel"],
-  data: () => ({
-    items: [],
-    model: [],
-    search: null,
-  }),
-
+  data() {
+    return {
+      items: [],
+      model: [],
+      search: null,
+    };
+  },
+  methods: {
+    updateWithEmit() {
+      this.$emit("chipsList", this.items);
+    },
+  },
   watch: {
     model(val) {
       if (val.length > 25) {

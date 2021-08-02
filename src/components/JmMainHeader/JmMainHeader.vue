@@ -12,10 +12,9 @@
       class="bg-blur"
     >
     </v-navigation-drawer>
-    <v-app-bar app fixed flat dark class="bg-blur">
+    <v-app-bar app fixed flat dense height="80" dark class="bg-blur">
       <jm-logo logo-size="400" logo-style="dark" />
       <v-spacer />
-
       <jm-main-toolbar />
       <v-app-bar-nav-icon
         class="my-auto hidden-lg-and-up"
@@ -24,10 +23,10 @@
       <template v-slot:extension>
         <v-container fluid class="mt-5">
           <v-row>
-            <v-col cols="6" class="d-flex justify-start">
+            <v-col cols="8" class="d-flex justify-start">
               <JmBreadcrumbs />
             </v-col>
-            <v-col cols="6" class="d-flex justify-end">
+            <v-col cols="4" class="">
               <JmSearchItems />
             </v-col>
           </v-row>

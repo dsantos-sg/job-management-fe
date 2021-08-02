@@ -12,7 +12,7 @@
           elevation="10"
           rounded="xl"
           class="mb-8"
-          v-for="(item, index) in interviews"
+          v-for="(item, index) in newJobInterviews.interviews"
           :key="index"
         >
           <v-card-title>
@@ -23,10 +23,14 @@
             </v-btn>
           </v-card-title>
           <v-card-text>
-            <v-switch v-model="interviews[index].scheduled" label="Scheduled" />
+            <v-switch
+              v-model="newJobInterviews.interviews[index].scheduled"
+              label="Scheduled"
+              @blur="updateWithEmit"
+            />
             <v-datetime-picker
               label="Set interview date and time"
-              v-model="interviews[index].interviewDateTime"
+              v-model="newJobInterviews.interviews[index].interviewDateTime"
             >
             </v-datetime-picker>
             <v-text-field
@@ -35,25 +39,29 @@
               label="Local"
               name="Local"
               clearable
+              @blur="updateWithEmit"
             ></v-text-field>
             <v-combobox
-              v-model="interviews[index].participants"
-              :items="interviews[index].contactFirstName"
+              v-model="newJobInterviews.interviews[index].participants"
+              :items="newJobInterviews.interviews[index].contactFirstName"
               label="Participants"
               multiple
               rounded
               chips
               outlined
               clearable
+              @blur="updateWithEmit"
             ></v-combobox>
             <v-textarea
-              v-model="interviews[index].additionalInfos"
+              v-model="newJobInterviews.interviews[index].additionalInfos"
               outlined
               rounded
               clearable
               rows="4"
               label="Additional infos"
               name="AdditionalInfos"
+              @blur="updateWithEmit"
+              auto-grow
             ></v-textarea>
           </v-card-text>
         </v-card>
@@ -81,26 +89,35 @@ export default {
   components: { VDatetimePicker },
   data() {
     return {
-      interviews: [
-        {
-          scheduled: "",
-          interviewDateTime: "",
-          address: "",
-          participants: [],
-          contactFirstName: ["kelly", "mike", "tina"],
-          additionalInfos: "",
-        },
-      ],
+      newJobInterviews: {
+        interviews: [
+          {
+            scheduled: "",
+            interviewDateTime: "",
+            geospatialData: {
+              type: "Point",
+              coordinates: [48.69548, 8.99777],
+            },
+            participants: [],
+            contactFirstName: ["kelly", "mike", "tina"],
+            additionalInfos: "",
+          },
+        ],
+      },
     };
   },
   methods: {
     addNewInterview() {
-      const newInterview = new Object();
-      this.interviews.push(newInterview);
+      const newInterview = {};
+      this.newJobInterviews.interviews.push(newInterview);
     },
     removeThisInterview(index) {
       alert("Remove this interview");
       this.contacts.splice(index, 1);
+    },
+    updateWithEmit() {
+      this.$emit("setNewJobInterviews", this.newJobInterviews);
+      console.log("job interview emit");
     },
   },
 };

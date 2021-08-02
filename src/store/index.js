@@ -11,6 +11,79 @@ export default new Vuex.Store({
     jobs: [],
     navigationDrawerState: false,
     loggedIn: false,
+    newJob: {
+      jobDescription: {
+        jobTitle: "",
+        jobCode: "",
+        jobLink: "",
+        priority: "",
+        publishDate: "",
+        closeDate: "",
+        jobDetail: "",
+        jobRequirements: "",
+        contractType: "",
+        salaryOffer: "",
+        benefits: [],
+        tags: [],
+        additionalInfos: "",
+      },
+      company: {
+        companyName: "",
+        website: "",
+        phone: [],
+        email: [],
+        geospatialData: {
+          type: "Point",
+          coordinates: [0, 0],
+        },
+        distanceFromHome: "",
+        aboutUs: "",
+        additionalInfos: "",
+      },
+      contacts: [
+        {
+          contactFirstName: "",
+          contactLastName: "",
+          role: "",
+          phone: [],
+          email: [],
+          additionalInfos: "",
+        },
+      ],
+      application: {
+        sent: true,
+        applicationDate: "",
+        additionalInfos: "",
+      },
+      interviews: [
+        {
+          scheduled: true,
+          interviewDateTime: "",
+          geospatialData: {
+            type: "Point",
+            coordinates: [0, 0],
+          },
+          participants: [],
+          additionalInfos: "",
+        },
+      ],
+      followUp: {
+        overview: {
+          ApplicationSent: "",
+          ScheduledInterview: "",
+          FinalAnswer: "",
+          RegisteredJob: "",
+          CompanyFeedback: "",
+        },
+        status: "",
+        companyFeedbackDate: "",
+        salaryOffer: "",
+        proposedSalary: "",
+        difference: "",
+        rating: "",
+        comments: [],
+      },
+    },
   },
   getters: {
     jobItems: (state) => {
@@ -39,6 +112,24 @@ export default new Vuex.Store({
     SET_LOGOUT(state) {
       state.loggedIn = false;
     },
+    //New job description
+    SET_NEW_JOB_DESCRIPTION_TITLE(state, payload) {
+      state.newJob.jobDescription.jobTitle = payload.newJobDescriptionTitle;
+    },
+    SET_NEW_JOB_DESCRIPTION_CODE(state, payload) {
+      state.newJob.jobDescription.jobCode = payload.newJobDescriptionCode;
+    },
+    SET_NEW_JOB_DESCRIPTION_LINK(state, payload) {
+      state.newJob.jobDescription.jobLink = payload.newJobDescriptionLink;
+    },
+    SET_NEW_JOB_DESCRIPTION_CONTRACT_TYPE(state, payload) {
+      state.newJob.jobDescription.contractType =
+        payload.newJobDescriptionContractType;
+    },
+    SET_NEW_JOB_DESCRIPTION_ADDITIONAL_INFOS(state, payload) {
+      state.newJob.jobDescription.additionalInfos =
+        payload.newJobDescriptionAdditionalInfos;
+    },
   },
   actions: {
     // loadJobsData({ commit }) {
@@ -63,7 +154,6 @@ export default new Vuex.Store({
           })
         ).data;
         context.commit("SET_JOB_ITEMS", jobs);
-        console.log(jobs);
       } catch (error) {
         context.commit("showError", error);
       }

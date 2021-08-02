@@ -17,11 +17,12 @@
         rounded
         v-bind="attrs"
         v-on="on"
+        @change="updateWithEmit"
       ></v-text-field>
     </template>
     <v-date-picker v-model="date" scrollable>
       <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="modal = false"> Cancel </v-btn>
+      <v-btn text color="primary" @click="modal = false"> Cancel</v-btn>
       <v-btn text color="primary" @click="$refs.dialog.save(date)"> OK </v-btn>
     </v-date-picker>
   </v-dialog>
@@ -31,11 +32,18 @@
 export default {
   name: "JmSetDate",
   props: ["dateLabel"],
-  data: () => ({
-    //new Date().toISOString().substr(0, 10)
-    date: null,
-    modal: false,
-  }),
+  data() {
+    return {
+      //new Date().toISOString().substr(0, 10)
+      date: null,
+      modal: false,
+    };
+  },
+  methods: {
+    updateWithEmit() {
+      this.$emit("getSelectedDate", this.date);
+    },
+  },
 };
 </script>
 

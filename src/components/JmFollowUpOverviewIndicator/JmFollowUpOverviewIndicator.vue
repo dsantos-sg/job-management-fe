@@ -41,7 +41,8 @@
           v-bind="attrs"
           v-on="on"
           class="pa-3"
-          color="secondary"
+          color="info"
+          disabled
         >
           <v-icon>mdi-calendar-cursor</v-icon>
         </v-btn>
@@ -58,7 +59,8 @@
           v-bind="attrs"
           v-on="on"
           class="pa-3"
-          color="secondary"
+          color="info"
+          disabled
         >
           <v-icon>mdi-account-question</v-icon>
         </v-btn>
