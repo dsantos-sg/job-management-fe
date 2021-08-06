@@ -17,9 +17,14 @@
         <v-slide-item
           v-for="(job, index) in $store.getters.jobItems"
           :key="index"
-          v-slot="{ active, toggle }"
+          v-slot="{}"
         >
-          <v-card color="transparent" flat @click="toggle" class="ma-8">
+          <v-card
+            color="transparent"
+            flat
+            @click="setEditItem(job)"
+            class="ma-8"
+          >
             <v-row class="fill-height" align="center" justify="center">
               <job-card
                 :job-title="job.jobDescription.jobTitle"
@@ -43,20 +48,33 @@
       <!--        {{ job.jobDescription.tags }}-->
       <!--      </div>-->
     </v-card>
+    <jm-edit-this-job
+      :selected-job="job"
+      :set-edit-item="editThisJob"
+      @setCloseDialog="editThisJob = $event"
+    />
   </v-container>
 </template>
 
 <script>
 import JobCard from "@/components/JobCard/JobCard";
+import JmEditThisJob from "@/components/JmEditThisJob/JmEditThisJob";
 
 export default {
   name: "JmCarouselJobCards",
-  components: { JobCard },
+  components: { JmEditThisJob, JobCard },
   data() {
     return {
       model: null,
-      totalCards: 5,
+      job: "",
+      editThisJob: false,
     };
+  },
+  methods: {
+    setEditItem(selectedJob) {
+      this.editThisJob = !this.editThisJob;
+      this.job = selectedJob;
+    },
   },
 
   // methods: {

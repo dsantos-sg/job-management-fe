@@ -74,6 +74,7 @@
 <script>
 export default {
   name: "JmJobApplication",
+  props: ["selectedApplication", "updateThisJob"],
   data() {
     return {
       modal: false,
@@ -93,6 +94,14 @@ export default {
       this.$emit("setNewJobApplication", this.newJobApplication);
       console.log("job application emit");
     },
+    updateJob() {
+      if (this.updateThisJob) {
+        this.newJobApplication = this.selectedApplication;
+      }
+    },
+  },
+  beforeMount() {
+    this.updateJob();
   },
 };
 </script>

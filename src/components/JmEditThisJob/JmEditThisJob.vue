@@ -6,6 +6,9 @@
     v-model="setEditItem"
     persistent
   >
+    <!--    &lt;!&ndash; ##################### remove this ######################## &ndash;&gt;-->
+    <!--    <v-btn @click="getJobById">load</v-btn>-->
+    <!--    &lt;!&ndash; ##################### remove this ######################## &ndash;&gt;-->
     <v-card tile class="jm-bg-cards bg-blur" min-height="1080" elevation="12">
       <v-tabs
         v-model="tab"
@@ -43,7 +46,10 @@
         <v-tabs-items class="transparent" v-model="tab">
           <!-- JOB DESCRIPTION ------------------------------------------------------------------------------------------>
           <v-tab-item>
-            <job-description-form />
+            <job-description-form
+              :selected-job-description="selectedJob.jobDescription"
+              update-this-job="true"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 1">
@@ -54,7 +60,10 @@
           </v-tab-item>
           <!-- COMPANY -------------------------------------------------------------------------------------------------->
           <v-tab-item>
-            <job-company-form />
+            <job-company-form
+              :selected-company="selectedJob.company"
+              update-this-job="true"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 0">
@@ -69,7 +78,10 @@
           </v-tab-item>
           <!-- CONTACTS ------------------------------------------------------------------------------------------------->
           <v-tab-item>
-            <job-contact-form />
+            <job-contact-form
+              :selected-contacts="selectedJob.contacts"
+              update-this-job="true"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 1">
@@ -84,7 +96,10 @@
           </v-tab-item>
           <!-- APPLICATION ---------------------------------------------------------------------------------------------->
           <v-tab-item>
-            <jm-job-application />
+            <jm-job-application
+              :selected-application="selectedJob.application"
+              update-this-job="=true"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 2">
@@ -99,7 +114,10 @@
           </v-tab-item>
           <!-- INTERVIEW ------------------------------------------------------------------------------------------------>
           <v-tab-item>
-            <jm-interviews />
+            <jm-interviews
+              :selected-interviews="selectedJob.interviews"
+              update-this-job="true"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 3">
@@ -114,7 +132,10 @@
           </v-tab-item>
           <!-- FOLLOW-UP ------------------------------------------------------------------------------------------------>
           <v-tab-item>
-            <jm-follow-up />
+            <jm-follow-up
+              :selected-follow-up="selectedJob.followUp"
+              update-this-job="true"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 4">
@@ -127,8 +148,18 @@
       </v-tabs>
       <v-card-actions>
         <v-spacer />
-        <v-btn outlined width="100" @click="closeDialog">Cancel</v-btn>
-        <v-btn color="primary" width="100" @click="closeDialog">Save</v-btn>
+        <v-btn
+          rounded
+          large
+          outlined
+          color="secondary"
+          width="100"
+          @click="closeDialog"
+          >Cancel</v-btn
+        >
+        <v-btn rounded large color="primary" width="100" @click="closeDialog"
+          >Save</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -151,15 +182,10 @@ export default {
     JobCompanyForm,
     JobDescriptionForm,
   },
-  props: {
-    setEditItem: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-  },
+  props: ["setEditItem", "selectedJob"],
   data() {
     return {
+      // job: {},
       tab: null,
     };
   },

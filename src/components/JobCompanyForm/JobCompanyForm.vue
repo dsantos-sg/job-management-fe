@@ -11,7 +11,7 @@
         <v-card elevation="10" rounded="xl">
           <v-card-text class="mt-3">
             <v-text-field
-              v-model="newJobCompany.companyName"
+              v-model="newCompany.companyName"
               label="Company name"
               placeholder="Company Name"
               outlined
@@ -20,7 +20,7 @@
               @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
-              v-model="newJobCompany.webSite"
+              v-model="newCompany.webSite"
               label="Website"
               placeholder="Web-site"
               outlined
@@ -30,11 +30,11 @@
             ></v-text-field>
             <jm-multi-text-field-list
               item-name="Phone"
-              @getListItems="newJobCompany.phone = $event"
+              @getListItems="newCompany.phone = $event"
             />
             <jm-multi-text-field-list
               item-name="Email"
-              @getListItems="newJobCompany.email = $event"
+              @getListItems="newCompany.email = $event"
             />
             <v-text-field
               label="Address"
@@ -44,7 +44,7 @@
               clearable
             ></v-text-field>
             <v-text-field
-              v-model="newJobCompany.distanceFromHome"
+              v-model="newCompany.distanceFromHome"
               label="Distance from Home"
               placeholder="Distance from Home"
               outlined
@@ -52,7 +52,7 @@
               clearable
             ></v-text-field>
             <v-textarea
-              v-model="newJobCompany.aboutUs"
+              v-model="newCompany.aboutUs"
               outlined
               clearable
               auto-grow
@@ -63,7 +63,7 @@
               @blur="updateWithEmit"
             ></v-textarea>
             <v-textarea
-              v-model="newJobCompany.additionalInfos"
+              v-model="newCompany.additionalInfos"
               outlined
               clearable
               auto-grow
@@ -85,10 +85,11 @@ import JmMultiTextFieldList from "@/components/JmMultiTextFieldList/JmMultiTextF
 
 export default {
   name: "JobCompanyForm",
+  props: ["selectedCompany", "updateThisJob"],
   components: { JmMultiTextFieldList },
   data() {
     return {
-      newJobCompany: {
+      newCompany: {
         companyName: "",
         webSite: "",
         phone: "",
@@ -105,9 +106,17 @@ export default {
   },
   methods: {
     updateWithEmit() {
-      this.$emit("setNewCompany", this.newJobCompany);
+      this.$emit("setNewCompany", this.newCompany);
       console.log("company emit");
     },
+    updateJob() {
+      if (this.updateThisJob) {
+        this.newCompany = this.selectedCompany;
+      }
+    },
+  },
+  beforeMount() {
+    this.updateJob();
   },
 };
 </script>

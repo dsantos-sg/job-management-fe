@@ -40,8 +40,11 @@
         </v-tab>
         <v-tabs-items class="transparent" v-model="tab">
           <v-tab-item>
+            <!-- TODO Clean code props items -->
             <job-description-form
               @setNewJobDescription="newJob.jobDescription = $event"
+              selected-job-description=""
+              update-this-job="false"
             />
             <v-container>
               <v-row>
@@ -61,7 +64,11 @@
             </v-container>
           </v-tab-item>
           <v-tab-item>
-            <job-company-form @setNewCompany="newJob.company = $event" />
+            <job-company-form
+              @setNewCompany="newJob.company = $event"
+              selected-company=""
+              update-this-job="false"
+            />
             <v-container>
               <v-row>
                 <v-col
@@ -84,7 +91,11 @@
             </v-container>
           </v-tab-item>
           <v-tab-item>
-            <job-contact-form @setNewJobContact="newJob.contacts = $event" />
+            <job-contact-form
+              @setNewJobContact="newJob.contacts = $event"
+              selected-contacts="[]"
+              update-this-job="false"
+            />
             <v-container>
               <v-row>
                 <v-col
@@ -98,6 +109,10 @@
                     <v-icon>mdi-chevron-left</v-icon>
                     Back
                   </v-btn>
+                  <v-btn plain color="primary" @click="tab = 3">
+                    Next
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -105,6 +120,8 @@
           <v-tab-item>
             <jm-job-application
               @setNewJobApplication="newJob.application = $event"
+              selected-application=""
+              update-this-job="false"
             />
             <v-card-actions>
               <v-spacer />
@@ -119,7 +136,11 @@
             </v-card-actions>
           </v-tab-item>
           <v-tab-item>
-            <jm-interviews @setNewJobInterviews="newJob.interviews = $event" />
+            <jm-interviews
+              @setNewJobInterviews="newJob.interviews = $event"
+              selected-interviews="[]"
+              update-this-job="false"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 3">
@@ -133,7 +154,11 @@
             </v-card-actions>
           </v-tab-item>
           <v-tab-item>
-            <jm-follow-up @setNewJobFollowUp="newJob.followUp = $event" />
+            <jm-follow-up
+              @setNewJobFollowUp="newJob.followUp = $event"
+              selected-follow-up=""
+              update-this-job="false"
+            />
             <v-card-actions>
               <v-spacer />
               <v-btn plain color="primary" @click="tab = 4">
@@ -147,7 +172,9 @@
       <v-divider />
       <v-card-actions class="mt-5">
         <v-spacer />
-        <v-btn to="/home" rounded large outlined width="100">Cancel</v-btn>
+        <v-btn to="/home" rounded large outlined color="secondary" width="100"
+          >Cancel</v-btn
+        >
         <v-btn rounded large color="primary" width="100" @click="submit"
           >Save
         </v-btn>
@@ -180,16 +207,16 @@ export default {
       newJob: {
         jobDescription: {},
         company: {},
-        contacts: {},
+        contacts: [],
         application: {},
-        interviews: {},
+        interviews: [],
         followUp: {},
       },
     };
   },
   methods: {
     async submit() {
-      this.$store.dispatch("addNewJobData", {
+      await this.$store.dispatch("addNewJobData", {
         jobDescription: this.newJob.jobDescription,
         company: this.newJob.company,
         contacts: this.newJob.contacts,
@@ -197,6 +224,7 @@ export default {
         interviews: this.newJob.interviews,
         followUp: this.newJob.followUp,
       });
+      this.$store.commit("RESET_NEW_JOB");
     },
   },
 };

@@ -86,6 +86,8 @@ import VDatetimePicker from "@/components/DateTimePicker/DateTimePicker";
 
 export default {
   name: "JmInterviews",
+  props: ["selectedInterviews", "updateThisJob"],
+
   components: { VDatetimePicker },
   data() {
     return {
@@ -116,9 +118,17 @@ export default {
       this.contacts.splice(index, 1);
     },
     updateWithEmit() {
-      this.$emit("setNewJobInterviews", this.newJobInterviews);
+      this.$emit("setNewJobInterviews", this.newJobInterviews.interviews);
       console.log("job interview emit");
     },
+    updateJob() {
+      if (this.updateThisJob) {
+        this.newJobInterviews.interviews = this.selectedInterviews;
+      }
+    },
+  },
+  beforeMount() {
+    this.updateJob();
   },
 };
 </script>

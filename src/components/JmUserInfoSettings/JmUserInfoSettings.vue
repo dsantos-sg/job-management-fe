@@ -98,7 +98,7 @@
             v-model="editName"
             persistent
           >
-            <v-card class="pa-5" elevation="12">
+            <v-card rounded="xl" class="pa-5" elevation="12">
               <v-card-title>
                 <h3 class="font-weight-regular">Change your name</h3>
               </v-card-title>
@@ -106,6 +106,7 @@
                 <v-text-field
                   label="Mike Tyson"
                   outlined
+                  rounded
                   clearable
                 ></v-text-field>
               </v-card-text>
@@ -113,11 +114,18 @@
                 <v-btn
                   color="secondary"
                   outlined
+                  rounded
+                  large
                   width="100"
                   @click="closeEditName"
                   >Cancel
                 </v-btn>
-                <v-btn color="primary" width="100" @click="closeEditName"
+                <v-btn
+                  color="primary"
+                  rounded
+                  large
+                  width="100"
+                  @click="closeEditName"
                   >Save
                 </v-btn>
               </v-card-actions>
@@ -137,6 +145,7 @@
                 <v-text-field
                   label="miketee@mail.com"
                   outlined
+                  rounded
                   clearable
                 ></v-text-field>
               </v-card-text>
@@ -144,11 +153,18 @@
                 <v-btn
                   color="secondary"
                   outlined
+                  rounded
+                  large
                   width="100"
                   @click="closeEditEmail"
                   >Cancel
                 </v-btn>
-                <v-btn color="primary" width="100" @click="closeEditEmail"
+                <v-btn
+                  color="primary"
+                  rounded
+                  large
+                  width="100"
+                  @click="closeEditEmail"
                   >Save
                 </v-btn>
               </v-card-actions>
@@ -160,7 +176,7 @@
             v-model="editPaswd"
             persistent
           >
-            <v-card class="pa-5" elevation="12">
+            <v-card rounded="xl" class="pa-5" elevation="12">
               <v-card-title>
                 <h3 class="font-weight-regular">Change your password</h3>
               </v-card-title>
@@ -169,6 +185,7 @@
                   type="password"
                   label="Actual password"
                   outlined
+                  rounded
                   clearable
                 ></v-text-field>
               </v-card-text>
@@ -177,6 +194,7 @@
                   type="password"
                   label="New password"
                   outlined
+                  rounded
                   clearable
                 ></v-text-field>
               </v-card-text>
@@ -185,6 +203,7 @@
                   type="password"
                   label="Retype your new password"
                   outlined
+                  rounded
                   clearable
                 ></v-text-field>
               </v-card-text>
@@ -192,11 +211,18 @@
                 <v-btn
                   color="secondary"
                   outlined
+                  rounded
+                  large
                   width="100"
                   @click="closeEditPaswd"
                   >Cancel
                 </v-btn>
-                <v-btn color="primary" width="100" @click="closeEditPaswd"
+                <v-btn
+                  color="primary"
+                  rounded
+                  large
+                  width="100"
+                  @click="closeEditPaswd"
                   >Save
                 </v-btn>
               </v-card-actions>

@@ -28,12 +28,12 @@
               outlined
               rounded
               clearable
-              v-model="newJobContact.contacts[index].firstName"
+              v-model="newJobContact.contacts[index].contactFirstName"
               @blur="updateWithEmit"
             ></v-text-field>
             <v-text-field
               label="Last name"
-              v-model="newJobContact.contacts[index].lastName"
+              v-model="newJobContact.contacts[index].contactLastName"
               rounded
               outlined
               clearable
@@ -92,14 +92,15 @@ import JmMultiTextFieldList from "@/components/JmMultiTextFieldList/JmMultiTextF
 
 export default {
   name: "JobContactForm",
+  props: ["selectedContacts", "updateThisJob"],
   components: { JmMultiTextFieldList },
   data() {
     return {
       newJobContact: {
         contacts: [
           {
-            firstName: "",
-            lastName: "",
+            contactFirstName: "",
+            contactLastName: "",
             role: "",
             phone: "",
             email: "",
@@ -120,9 +121,17 @@ export default {
       this.newJobContact.contacts.splice(index, 1);
     },
     updateWithEmit() {
-      this.$emit("setNewJobContact", this.newJobContact);
+      this.$emit("setNewJobContact", this.newJobContact.contacts);
       console.log("job contact emit");
     },
+    updateJob() {
+      if (this.updateThisJob) {
+        this.newJobContact.contacts = this.selectedContacts;
+      }
+    },
+  },
+  beforeMount() {
+    this.updateJob();
   },
 };
 </script>

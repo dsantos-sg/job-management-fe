@@ -246,6 +246,8 @@
 <script>
 export default {
   name: "JmFollowUp",
+  props: ["selectedFollowUp", "updateThisJob"],
+
   data() {
     return {
       modal: false,
@@ -278,6 +280,14 @@ export default {
       this.$emit("setNewJobFollowUp", this.newJobFollowUp);
       console.log("job followUp emit");
     },
+    updateJob() {
+      if (this.updateThisJob) {
+        this.newJobFollowUp = this.selectedFollowUp;
+      }
+    },
+  },
+  beforeMount() {
+    this.updateJob();
   },
 };
 </script>

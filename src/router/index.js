@@ -25,14 +25,6 @@ const routes = [
       ),
   },
   {
-    path: "/job-detail",
-    name: "Detailed job",
-    component: () =>
-      import(
-        /* webpackChunkName: "group" */ "../views/DetailedJob/DetailedJob"
-      ),
-  },
-  {
     path: "/login",
     name: "Login",
     component: () =>
