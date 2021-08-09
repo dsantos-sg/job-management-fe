@@ -27,6 +27,9 @@ export default {
   mounted() {
     this.setLogin();
   },
+  beforeMount() {
+    this.$store.dispatch("loadJobsData");
+  },
 };
 </script>
 

@@ -10,6 +10,7 @@
     <!--    <v-btn @click="getJobById">load</v-btn>-->
     <!--    &lt;!&ndash; ##################### remove this ######################## &ndash;&gt;-->
     <v-card tile class="jm-bg-cards bg-blur" min-height="1080" elevation="12">
+      <h1>{{ idJob }}</h1>
       <v-tabs
         v-model="tab"
         centered
@@ -47,8 +48,9 @@
           <!-- JOB DESCRIPTION ------------------------------------------------------------------------------------------>
           <v-tab-item>
             <job-description-form
-              :selected-job-description="selectedJob.jobDescription"
-              update-this-job="true"
+              @setJobDescription="updateJob.jobDescription = $event"
+              :selected-job="selectedJob.jobDescription"
+              :update-this-job="true"
             />
             <v-card-actions>
               <v-spacer />
@@ -61,8 +63,9 @@
           <!-- COMPANY -------------------------------------------------------------------------------------------------->
           <v-tab-item>
             <job-company-form
+              @setNewJobDescription="updateJob.company = $event"
               :selected-company="selectedJob.company"
-              update-this-job="true"
+              :update-this-job="true"
             />
             <v-card-actions>
               <v-spacer />
@@ -79,8 +82,9 @@
           <!-- CONTACTS ------------------------------------------------------------------------------------------------->
           <v-tab-item>
             <job-contact-form
+              @setNewJobDescription="updateJob.contacts = $event"
               :selected-contacts="selectedJob.contacts"
-              update-this-job="true"
+              :update-this-job="true"
             />
             <v-card-actions>
               <v-spacer />
@@ -97,8 +101,9 @@
           <!-- APPLICATION ---------------------------------------------------------------------------------------------->
           <v-tab-item>
             <jm-job-application
+              @setNewJobDescription="updateJob.application = $event"
               :selected-application="selectedJob.application"
-              update-this-job="=true"
+              :update-this-job="true"
             />
             <v-card-actions>
               <v-spacer />
@@ -115,8 +120,9 @@
           <!-- INTERVIEW ------------------------------------------------------------------------------------------------>
           <v-tab-item>
             <jm-interviews
+              @setNewJobDescription="updateJob.interviews = $event"
               :selected-interviews="selectedJob.interviews"
-              update-this-job="true"
+              :update-this-job="true"
             />
             <v-card-actions>
               <v-spacer />
@@ -133,8 +139,9 @@
           <!-- FOLLOW-UP ------------------------------------------------------------------------------------------------>
           <v-tab-item>
             <jm-follow-up
+              @setNewJobDescription="updateJob.followUp = $event"
               :selected-follow-up="selectedJob.followUp"
-              update-this-job="true"
+              :update-this-job="true"
             />
             <v-card-actions>
               <v-spacer />
@@ -155,11 +162,11 @@
           color="secondary"
           width="100"
           @click="closeDialog"
-          >Cancel</v-btn
-        >
-        <v-btn rounded large color="primary" width="100" @click="closeDialog"
-          >Save</v-btn
-        >
+          >Cancel
+        </v-btn>
+        <v-btn rounded large color="primary" width="100" @click="submit"
+          >Save
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -186,12 +193,37 @@ export default {
   data() {
     return {
       // job: {},
+      text: "",
       tab: null,
+      updateJob: {
+        jobDescription: "",
+        company: "",
+        contacts: "",
+        application: "",
+        interviews: "",
+        followUp: "",
+      },
+      idJob: this.selectedJob.id,
     };
   },
   methods: {
     closeDialog() {
       this.$emit("setCloseDialog", false);
+    },
+    async submit() {
+      const jobId = this.idJob;
+      await this.$store.dispatch("updateJobById", {
+        id: jobId,
+        job: {
+          jobDescription: this.updateJob.jobDescription,
+          company: this.updateJob.company,
+          contacts: this.updateJob.contacts,
+          application: this.updateJob.application,
+          interviews: this.updateJob.interviews,
+          followUp: this.updateJob.followUp,
+        },
+      });
+      this.$store.commit("RESET_NEW_JOB");
     },
   },
 };

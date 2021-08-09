@@ -40,11 +40,11 @@
         </v-tab>
         <v-tabs-items class="transparent" v-model="tab">
           <v-tab-item>
-            <!-- TODO Clean code props items -->
+            <!-- TODO Clean code props items, ex :update-this-job. Use if (selected-job = {}) do something -->
             <job-description-form
-              @setNewJobDescription="newJob.jobDescription = $event"
-              selected-job-description=""
-              update-this-job="false"
+              @setJobDescription="newJob.jobDescription = $event"
+              :selected-job="{}"
+              :update-this-job="false"
             />
             <v-container>
               <v-row>
@@ -66,8 +66,8 @@
           <v-tab-item>
             <job-company-form
               @setNewCompany="newJob.company = $event"
-              selected-company=""
-              update-this-job="false"
+              :selected-company="{}"
+              :update-this-job="false"
             />
             <v-container>
               <v-row>
@@ -93,8 +93,8 @@
           <v-tab-item>
             <job-contact-form
               @setNewJobContact="newJob.contacts = $event"
-              selected-contacts="[]"
-              update-this-job="false"
+              :selected-contacts="[{}]"
+              :update-this-job="false"
             />
             <v-container>
               <v-row>
@@ -120,8 +120,8 @@
           <v-tab-item>
             <jm-job-application
               @setNewJobApplication="newJob.application = $event"
-              selected-application=""
-              update-this-job="false"
+              :selected-application="{}"
+              :update-this-job="false"
             />
             <v-card-actions>
               <v-spacer />
@@ -138,8 +138,8 @@
           <v-tab-item>
             <jm-interviews
               @setNewJobInterviews="newJob.interviews = $event"
-              selected-interviews="[]"
-              update-this-job="false"
+              :selected-interviews="[{}]"
+              :update-this-job="false"
             />
             <v-card-actions>
               <v-spacer />
@@ -156,8 +156,8 @@
           <v-tab-item>
             <jm-follow-up
               @setNewJobFollowUp="newJob.followUp = $event"
-              selected-follow-up=""
-              update-this-job="false"
+              :selected-follow-up="{}"
+              :update-this-job="false"
             />
             <v-card-actions>
               <v-spacer />
@@ -173,8 +173,8 @@
       <v-card-actions class="mt-5">
         <v-spacer />
         <v-btn to="/home" rounded large outlined color="secondary" width="100"
-          >Cancel</v-btn
-        >
+          >Cancel
+        </v-btn>
         <v-btn rounded large color="primary" width="100" @click="submit"
           >Save
         </v-btn>

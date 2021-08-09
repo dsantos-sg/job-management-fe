@@ -34,8 +34,12 @@ export default new Vuex.Store({
     ADD_NEW_JOB(state, job) {
       state.jobs = job;
     },
-    SET_JOB_ITEMS(state, jobItems) {
+    GET_JOB_ITEMS(state, jobItems) {
       state.jobs = jobItems;
+    },
+    UPDATE_JOB_ITEM_BY_ID(state, job) {
+      const index = state.jobs.findIndex((s) => s.id == job.id);
+      Vue.set(state.jobs, index, job);
     },
     TOGGLE_DRAWER(state) {
       state.navigationDrawerState = !state.navigationDrawerState;
@@ -72,7 +76,7 @@ export default new Vuex.Store({
             headers: { "Content-type": "application/json" },
           })
         ).data;
-        context.commit("SET_JOB_ITEMS", jobs);
+        context.commit("GET_JOB_ITEMS", jobs);
       } catch (error) {
         context.commit("showError", error);
       }
@@ -82,6 +86,12 @@ export default new Vuex.Store({
         .data;
       context.commit("ADD_NEW_JOB", newJob);
       alert("new job add successfully");
+    },
+    async updateJobById(context, { id, job }) {
+      const jobId = (
+        await axios.put(`http://localhost:8080/api/jobs/${id}`, job)
+      ).data;
+      context.commit("UPDATE_JOB_ITEM_BY_ID", jobId);
     },
   },
   modules: {},
