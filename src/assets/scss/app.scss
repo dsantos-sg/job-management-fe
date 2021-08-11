@@ -45,3 +45,7 @@
   font-family: "Roboto Condensed", sans-serif !important;
 }
 
+.text-ellipse {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

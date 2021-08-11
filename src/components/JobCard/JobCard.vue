@@ -1,12 +1,9 @@
 <template>
   <v-card outlined elevation="10" rounded="xl" width="350" height="480">
     <v-container>
-      <div flat class="d-flex">
+      <div>
+        <!-- TODO Fix text ellipse overflow -->
         <h1 class="title text-ellipse">{{ jobTitle }}</h1>
-        <v-spacer />
-        <v-btn fab color="secondary" plain x-small to="#">
-          <v-icon>mdi-pencil</v-icon>
-        </v-btn>
       </div>
       <div>
         <h1 class="subtitle-2 text--secondary">{{ company }}</h1>

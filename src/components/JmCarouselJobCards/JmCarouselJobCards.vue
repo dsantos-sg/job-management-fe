@@ -31,7 +31,7 @@
                 :company="job.company.companyName"
                 :company-address="job.company.geospatialData"
                 :dist-from-home="job.company.distanceFromHome"
-                :published-date="job.jobDescription.publishedDate"
+                :published-date="job.jobDescription.publishDate"
                 :priority="job.jobDescription.priority"
                 :rating="job.followUp.rating"
                 scheduled-interviews="NO"
@@ -76,17 +76,6 @@ export default {
       this.job = selectedJob;
     },
   },
-
-  // methods: {
-  //   next() {
-  //     this.onboarding =
-  //       this.onboarding + 1 === this.length ? 0 : this.onboarding + 1;
-  //   },
-  //   prev() {
-  //     this.onboarding =
-  //       this.onboarding - 1 < 0 ? this.length - 1 : this.onboarding - 1;
-  //   },
-  // },
 };
 </script>
 

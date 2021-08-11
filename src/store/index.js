@@ -41,6 +41,10 @@ export default new Vuex.Store({
       const index = state.jobs.findIndex((s) => s.id == job.id);
       Vue.set(state.jobs, index, job);
     },
+    DELETE_JOB_BY_ID(state, job) {
+      const index = state.jobs.findIndex((s) => s.id == job.id);
+      state.jobs.splice(index, 1);
+    },
     TOGGLE_DRAWER(state) {
       state.navigationDrawerState = !state.navigationDrawerState;
     },
@@ -55,20 +59,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    // loadJobsData({ commit }) {
-    //   axios
-    //     .get(URL, {
-    //       headers: {
-    //         "Content-type": "application/json",
-    //       },
-    //     })
-    //     .then((response) => response.data)
-    //     .then((jobItems) => {
-    //       console.log("Jobs list");
-    //       console.log(jobItems);
-    //       commit("SET_JOB_ITEMS", jobItems);
-    //     });
-    // },
     async loadJobsData(context) {
       try {
         const jobs = (
@@ -92,7 +82,14 @@ export default new Vuex.Store({
         await axios.patch(`http://localhost:8080/api/jobs/${id}`, job)
       ).data;
       context.commit("UPDATE_JOB_BY_ID", jobEditing);
-      alert("Job is updated successfully");
+      alert("Job updated successfully");
+    },
+    async deleteThisJob(context, id) {
+      const jobDeleting = await axios.delete(
+        `http://localhost:8080/api/jobs/${id}`
+      );
+      context.commit("DELETE_JOB_BY_ID", jobDeleting);
+      alert("Job deleted successfully");
     },
   },
   modules: {},

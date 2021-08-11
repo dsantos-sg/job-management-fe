@@ -6,11 +6,29 @@
     v-model="setEditItem"
     persistent
   >
-    <!--    &lt;!&ndash; ##################### remove this ######################## &ndash;&gt;-->
-    <!--    <v-btn @click="getJobById">load</v-btn>-->
-    <!--    &lt;!&ndash; ##################### remove this ######################## &ndash;&gt;-->
     <v-card tile class="jm-bg-cards bg-blur" min-height="1080" elevation="12">
-      <h1>{{ selectedJob.id }}</h1>
+      <v-card-title class="my-3">
+        <v-spacer />
+        <h2 class="font-weight-light">Edit</h2>
+        <v-spacer />
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              ripple
+              plain
+              fab
+              small
+              v-on="on"
+              v-bind="attrs"
+              @click="deleteThisJob"
+            >
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </template>
+          <span>Delete this job</span>
+        </v-tooltip>
+      </v-card-title>
+      <v-divider />
       <v-tabs
         v-model="tab"
         centered
@@ -211,7 +229,6 @@ export default {
     },
     async submit() {
       const jobId = this.selectedJob.id;
-      console.log(this.selectedJob.id);
       await this.$store.dispatch("updateJob", {
         id: jobId,
         job: {
@@ -223,6 +240,10 @@ export default {
           followUp: this.updateJob.followUp,
         },
       });
+    },
+    async deleteThisJob() {
+      const jobId = this.selectedJob.id;
+      await this.$store.dispatch("deleteThisJob", jobId);
     },
   },
 };
