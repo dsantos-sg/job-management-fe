@@ -196,12 +196,12 @@ export default {
       text: "",
       tab: null,
       updateJob: {
-        jobDescription: "",
-        company: "",
-        contacts: [],
-        application: "",
-        interviews: [],
-        followUp: "",
+        jobDescription: null,
+        company: null,
+        contacts: [null],
+        application: null,
+        interviews: [null],
+        followUp: null,
       },
     };
   },
