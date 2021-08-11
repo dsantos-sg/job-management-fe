@@ -138,35 +138,35 @@ export default {
 
     updateJobTitle(e) {
       this.jobDescription.jobTitle = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
     updateJobCode(e) {
       this.jobDescription.jobCode = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
     updateJobLink(e) {
       this.jobDescription.jobLink = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
     updateJobDetail(e) {
       this.jobDescription.jobDetail = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
     updateJobRequirements(e) {
       this.jobDescription.jobRequirements = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
     updateContractType(e) {
       this.jobDescription.contractType = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
     updateAdditionalInfos(e) {
       this.jobDescription.additionalInfos = e;
-      this.updateWithEmit();
+      // this.updateWithEmit();
     },
   },
-  // mounted() {
-  //   this.updateAll();
-  // },
+  updated() {
+    this.updateWithEmit();
+  },
 };
 </script>

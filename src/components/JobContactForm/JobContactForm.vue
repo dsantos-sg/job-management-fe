@@ -11,7 +11,7 @@
         <v-card
           elevation="10"
           rounded="xl"
-          v-for="(item, index) in newJobContact.contacts"
+          v-for="(item, index) in contacts"
           :key="index"
           class="mb-8"
         >
@@ -24,49 +24,48 @@
           </v-card-title>
           <v-card-text>
             <v-text-field
+              :value="contacts[index].contactFirstName"
               label="First name"
               outlined
               rounded
               clearable
-              v-model="newJobContact.contacts[index].contactFirstName"
-              @blur="updateWithEmit"
+              @input="updateFirstName(index)"
             ></v-text-field>
             <v-text-field
+              :value="contacts[index].contactLastName"
               label="Last name"
-              v-model="newJobContact.contacts[index].contactLastName"
               rounded
               outlined
               clearable
-              @blur="updateWithEmit"
+              @input="updateLastName(index)"
             ></v-text-field>
             <v-text-field
+              :value="contacts[index].role"
               label="Role"
-              v-model="newJobContact.contacts[index].role"
               rounded
               outlined
               clearable
-              @blur="updateWithEmit"
+              @input="updateRole(index)"
             ></v-text-field>
             <jm-multi-text-field-list
               item-name="Phone"
-              @getListItems="newJobContact.contacts[index].phone = $event"
+              @getListItems="contacts[index].phone = $event"
               @change="updateWithEmit"
             />
             <jm-multi-text-field-list
               item-name="Email"
-              @getListItems="newJobContact.contacts[index].email = $event"
+              @getListItems="contacts[index].email = $event"
               @change="updateWithEmit"
             />
             <v-textarea
+              :value="contacts[index].additionalInfo"
               outlined
               clearable
               auto-grow
               rounded
               rows="4"
-              v-model="newJobContact.contacts[index].additionalInfo"
               label="Additional infos"
-              name="AdditionalInfos"
-              @blur="updateWithEmit"
+              @input="updateAdditionalInfos(index)"
             ></v-textarea>
           </v-card-text>
         </v-card>
@@ -96,42 +95,46 @@ export default {
   components: { JmMultiTextFieldList },
   data() {
     return {
-      newJobContact: {
-        contacts: [
-          {
-            contactFirstName: "",
-            contactLastName: "",
-            role: "",
-            phone: "",
-            email: "",
-            additionalInfo: "",
-          },
-        ],
-      },
+      contacts: [
+        {
+          contactFirstName: "",
+          contactLastName: "",
+          role: "",
+          phone: "",
+          email: "",
+          additionalInfo: "",
+        },
+      ],
       dialog: false,
     };
   },
   methods: {
     addNewContact() {
       const newContact = {};
-      this.newJobContact.contacts.push(newContact);
+      this.contacts.push(newContact);
     },
     removeThisContact(index) {
       alert("Remove this contact");
-      this.newJobContact.contacts.splice(index, 1);
+      this.contacts.splice(index, 1);
     },
     updateWithEmit() {
-      this.$emit("setNewJobContact", this.newJobContact.contacts);
-      console.log("job contact emit");
+      this.$emit("setContact", this.contacts);
     },
-    updateJob() {
-      if (this.updateThisJob) {
-        this.newJobContact.contacts = this.selectedContacts;
-      }
+    updateFirstName(e, index) {
+      this.contacts[index].contactFirstName = e;
+    },
+    updateLastName(e, index) {
+      this.contacts[index].contactLastName = e;
+    },
+    updateRole(e, index) {
+      this.contacts[index].role = e;
+    },
+    updateAdditionalInfos(e, index) {
+      this.contacts[index].additionalInfo = e;
     },
   },
-  beforeMount() {
-    this.updateJob();
+  updated() {
+    this.updateWithEmit();
   },
 };
 </script>

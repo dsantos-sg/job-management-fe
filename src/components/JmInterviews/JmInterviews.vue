@@ -12,7 +12,7 @@
           elevation="10"
           rounded="xl"
           class="mb-8"
-          v-for="(item, index) in newJobInterviews.interviews"
+          v-for="(item, index) in jobInterviews.interviews"
           :key="index"
         >
           <v-card-title>
@@ -24,13 +24,13 @@
           </v-card-title>
           <v-card-text>
             <v-switch
-              v-model="newJobInterviews.interviews[index].scheduled"
+              :value="jobInterviews.interviews[index].scheduled"
               label="Scheduled"
-              @blur="updateWithEmit"
+              @input="updateScheduled(index)"
             />
             <v-datetime-picker
               label="Set interview date and time"
-              v-model="newJobInterviews.interviews[index].interviewDateTime"
+              v-model="jobInterviews.interviews[index].interviewDateTime"
             >
             </v-datetime-picker>
             <v-text-field
@@ -42,8 +42,8 @@
               @blur="updateWithEmit"
             ></v-text-field>
             <v-combobox
-              v-model="newJobInterviews.interviews[index].participants"
-              :items="newJobInterviews.interviews[index].contactFirstName"
+              v-model="jobInterviews.interviews[index].participants"
+              :items="jobInterviews.interviews[index].contactFirstName"
               label="Participants"
               multiple
               rounded
@@ -53,14 +53,13 @@
               @blur="updateWithEmit"
             ></v-combobox>
             <v-textarea
-              v-model="newJobInterviews.interviews[index].additionalInfos"
+              :value="jobInterviews.interviews[index].additionalInfos"
               outlined
               rounded
               clearable
               rows="4"
               label="Additional infos"
-              name="AdditionalInfos"
-              @blur="updateWithEmit"
+              @input="updateAdditionalInfos(index)"
               auto-grow
             ></v-textarea>
           </v-card-text>
@@ -91,7 +90,7 @@ export default {
   components: { VDatetimePicker },
   data() {
     return {
-      newJobInterviews: {
+      jobInterviews: {
         interviews: [
           {
             scheduled: "",
@@ -111,24 +110,24 @@ export default {
   methods: {
     addNewInterview() {
       const newInterview = {};
-      this.newJobInterviews.interviews.push(newInterview);
+      this.jobInterviews.interviews.push(newInterview);
     },
     removeThisInterview(index) {
       alert("Remove this interview");
       this.contacts.splice(index, 1);
     },
     updateWithEmit() {
-      this.$emit("setNewJobInterviews", this.newJobInterviews.interviews);
-      console.log("job interview emit");
+      this.$emit("setInterviews", this.jobInterviews.interviews);
     },
-    updateJob() {
-      if (this.updateThisJob) {
-        this.newJobInterviews.interviews = this.selectedInterviews;
-      }
+    updateScheduled(e, index) {
+      this.jobInterviews[index].scheduled = e;
+    },
+    updateAdditionalInfos(e, index) {
+      this.jobInterviews[index].additionalInfos = e;
     },
   },
-  beforeMount() {
-    this.updateJob();
+  updated() {
+    this.updateWithEmit();
   },
 };
 </script>

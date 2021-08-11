@@ -99,10 +99,7 @@
                 </v-tooltip>
               </v-card>
               <v-card-subtitle class="ml-n5 mt-3 mb-n5">Status</v-card-subtitle>
-              <v-radio-group
-                v-model="newJobFollowUp.status"
-                @blur="updateWithEmit"
-              >
+              <v-radio-group :value="jobFollowUp.status" @input="updateStatus">
                 <v-radio label="In progress" />
                 <v-radio label="Approved" />
                 <v-radio label="Rejected" />
@@ -112,14 +109,14 @@
             <v-dialog
               ref="dialog"
               v-model="modal"
-              :return-value.sync="newJobFollowUp.companyFeedbackDate"
+              :return-value.sync="jobFollowUp.companyFeedbackDate"
               persistent
               width="290px"
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   outlined
-                  v-model="newJobFollowUp.companyFeedbackDate"
+                  v-model="jobFollowUp.companyFeedbackDate"
                   label="First company feedback"
                   readonly
                   v-bind="attrs"
@@ -133,7 +130,7 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="newJobFollowUp.companyFeedbackDate"
+                v-model="jobFollowUp.companyFeedbackDate"
                 scrollable
               >
                 <v-spacer></v-spacer>
@@ -143,50 +140,50 @@
                 <v-btn
                   text
                   color="primary"
-                  @click="$refs.dialog.save(newJobFollowUp.companyFeedbackDate)"
+                  @click="$refs.dialog.save(jobFollowUp.companyFeedbackDate)"
                 >
                   OK
                 </v-btn>
               </v-date-picker>
             </v-dialog>
             <v-text-field
-              v-model="newJobFollowUp.salaryOffer"
+              :value="jobFollowUp.salaryOffer"
               label="Salary Offer (Year)"
               placeholder="Salary Offer (Year)"
               outlined
               rounded
               clearable
-              @blur="updateWithEmit"
+              @input="updateSalaryOffer"
             ></v-text-field>
             <v-text-field
-              v-model="newJobFollowUp.proposedSalary"
+              :value="jobFollowUp.proposedSalary"
               label="Proposed Salary (Year)"
               placeholder="Proposed Salary (Year)"
               outlined
               rounded
               clearable
-              @blur="updateWithEmit"
+              @input="updateProposedSalary"
             ></v-text-field>
             <v-text-field
-              v-model="newJobFollowUp.salaryDifference"
+              :value="jobFollowUp.difference"
               label="Difference"
               placeholder="Difference"
               outlined
               rounded
               clearable
-              @blur="updateWithEmit"
+              @input="updateDifference"
             ></v-text-field>
             <v-card flat class="mb-8">
               <v-alert outlined rounded="xl" color="grey">
                 <v-card-subtitle class="ml-n5 mt-n3">Rating</v-card-subtitle>
                 <v-rating
-                  v-model="newJobFollowUp.rating"
+                  :value="jobFollowUp.rating"
                   color="grey darken-3"
                   background-color="grey darken-1"
                   hover
                   large
                   dense
-                  @blur="updateWithEmit"
+                  @input="updateRating"
                 ></v-rating>
               </v-alert>
             </v-card>
@@ -210,13 +207,13 @@
                   rounded="xl"
                   class="mb-10"
                   elevation="12"
-                  v-for="(item, index) in newJobFollowUp.comments"
+                  v-for="(item, index) in jobFollowUp.comments"
                   :key="index"
                 >
                   <v-card-subtitle>
                     <h3 class="font-weight-regular">
                       {{
-                        newJobFollowUp.comments[index].commentDateTime
+                        jobFollowUp.comments[index].commentDateTime
                           .toString()
                           .substr(0, 24)
                       }}
@@ -229,7 +226,7 @@
                       rows="1"
                       flat
                       readonly
-                      :value="newJobFollowUp.comments[index].comment"
+                      :value="jobFollowUp.comments[index].comment"
                     >
                     </v-textarea>
                   </v-card-text>
@@ -252,8 +249,7 @@ export default {
     return {
       modal: false,
       // myLabel: Date().toString().substr(0, 10),
-
-      newJobFollowUp: {
+      jobFollowUp: {
         status: "",
         companyFeedbackDate: "",
         salaryOffer: "",
@@ -271,23 +267,32 @@ export default {
   methods: {
     addNewComment() {
       if (this.tempComment.comment) {
-        this.newJobFollowUp.comments.push(this.tempComment);
+        this.jobFollowUp.comments.push(this.tempComment);
         this.tempComment = {};
         this.tempComment.commentDateTime = new Date();
       }
     },
     updateWithEmit() {
-      this.$emit("setNewJobFollowUp", this.newJobFollowUp);
-      console.log("job followUp emit");
+      this.$emit("setFollowUp", this.jobFollowUp);
     },
-    updateJob() {
-      if (this.updateThisJob) {
-        this.newJobFollowUp = this.selectedFollowUp;
-      }
+    updateStatus(e) {
+      this.jobFollowUp.status = e;
+    },
+    updateSalaryOffer(e) {
+      this.jobFollowUp.salaryOffer = e;
+    },
+    updateProposedSalary(e) {
+      this.jobFollowUp.proposedSalary = e;
+    },
+    updateDifference(e) {
+      this.jobFollowUp.difference = e;
+    },
+    updateRating(e) {
+      this.jobFollowUp.rating = e;
     },
   },
-  beforeMount() {
-    this.updateJob();
+  updated() {
+    this.updateWithEmit();
   },
 };
 </script>

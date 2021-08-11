@@ -11,67 +11,62 @@
         <v-card elevation="10" rounded="xl">
           <v-card-text class="mt-3">
             <v-text-field
-              v-model="newCompany.companyName"
+              :value="company.companyName"
               label="Company name"
-              placeholder="Company Name"
               outlined
               rounded
               clearable
-              @blur="updateWithEmit"
+              @input="updateCompanyName"
             ></v-text-field>
             <v-text-field
-              v-model="newCompany.webSite"
+              :value="company.webSite"
               label="Website"
-              placeholder="Web-site"
               outlined
               rounded
               clearable
-              @blur="updateWithEmit"
+              @input="updateWebSite"
             ></v-text-field>
             <jm-multi-text-field-list
               item-name="Phone"
-              @getListItems="newCompany.phone = $event"
+              @getListItems="company.phone = $event"
             />
             <jm-multi-text-field-list
               item-name="Email"
-              @getListItems="newCompany.email = $event"
+              @getListItems="company.email = $event"
             />
             <v-text-field
               label="Address"
-              placeholder="Address"
               outlined
               rounded
               clearable
             ></v-text-field>
             <v-text-field
-              v-model="newCompany.distanceFromHome"
+              :value="company.distanceFromHome"
               label="Distance from Home"
-              placeholder="Distance from Home"
               outlined
               rounded
               clearable
+              @input="updateDistanceFromHome"
             ></v-text-field>
             <v-textarea
-              v-model="newCompany.aboutUs"
+              :value="company.aboutUs"
               outlined
               clearable
               auto-grow
               rounded
               rows="6"
               label="About us"
-              name="AboutUs"
-              @blur="updateWithEmit"
+              @input="updateAboutUs"
             ></v-textarea>
             <v-textarea
-              v-model="newCompany.additionalInfos"
+              :value="company.additionalInfos"
               outlined
               clearable
               auto-grow
               rounded
               rows="4"
               label="Additional infos"
-              name="AdditionalInfos"
-              @blur="updateWithEmit"
+              @input="updateAdditionalInfos"
             ></v-textarea>
           </v-card-text>
         </v-card>
@@ -89,34 +84,43 @@ export default {
   components: { JmMultiTextFieldList },
   data() {
     return {
-      newCompany: {
-        companyName: "",
-        webSite: "",
-        phone: "",
-        email: "",
+      company: {
+        companyName: this.selectedCompany.companyName,
+        webSite: this.selectedCompany.webSite,
+        phone: [],
+        email: [],
         geospatialData: {
           type: "Point",
           coordinates: [48.69548, 8.99777],
         },
-        distanceFromHome: "",
-        aboutUs: "",
-        additionalInfos: "",
+        distanceFromHome: this.selectedCompany.distanceFromHome,
+        aboutUs: this.selectedCompany.distanceFromHome,
+        additionalInfos: this.selectedCompany.additionalInfos,
       },
     };
   },
   methods: {
     updateWithEmit() {
-      this.$emit("setNewCompany", this.newCompany);
-      console.log("company emit");
+      this.$emit("setCompany", this.company);
     },
-    updateJob() {
-      if (this.updateThisJob) {
-        this.newCompany = this.selectedCompany;
-      }
+    updateCompanyName(e) {
+      this.company.companyName = e;
+    },
+    updateWebSite(e) {
+      this.company.webSite = e;
+    },
+    updateDistanceFromHome(e) {
+      this.company.distanceFromHome = e;
+    },
+    updateAboutUs(e) {
+      this.company.aboutUs = e;
+    },
+    updateAdditionalInfos(e) {
+      this.company.additionalInfos = e;
     },
   },
-  beforeMount() {
-    this.updateJob();
+  updated() {
+    this.updateWithEmit();
   },
 };
 </script>

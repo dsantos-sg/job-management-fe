@@ -10,7 +10,7 @@
     <!--    <v-btn @click="getJobById">load</v-btn>-->
     <!--    &lt;!&ndash; ##################### remove this ######################## &ndash;&gt;-->
     <v-card tile class="jm-bg-cards bg-blur" min-height="1080" elevation="12">
-      <h1>{{ idJob }}</h1>
+      <h1>{{ selectedJob.id }}</h1>
       <v-tabs
         v-model="tab"
         centered
@@ -63,7 +63,7 @@
           <!-- COMPANY -------------------------------------------------------------------------------------------------->
           <v-tab-item>
             <job-company-form
-              @setNewJobDescription="updateJob.company = $event"
+              @setCompany="updateJob.company = $event"
               :selected-company="selectedJob.company"
               :update-this-job="true"
             />
@@ -82,7 +82,7 @@
           <!-- CONTACTS ------------------------------------------------------------------------------------------------->
           <v-tab-item>
             <job-contact-form
-              @setNewJobDescription="updateJob.contacts = $event"
+              @setContact="updateJob.contacts = $event"
               :selected-contacts="selectedJob.contacts"
               :update-this-job="true"
             />
@@ -101,7 +101,7 @@
           <!-- APPLICATION ---------------------------------------------------------------------------------------------->
           <v-tab-item>
             <jm-job-application
-              @setNewJobDescription="updateJob.application = $event"
+              @setApplication="updateJob.application = $event"
               :selected-application="selectedJob.application"
               :update-this-job="true"
             />
@@ -120,7 +120,7 @@
           <!-- INTERVIEW ------------------------------------------------------------------------------------------------>
           <v-tab-item>
             <jm-interviews
-              @setNewJobDescription="updateJob.interviews = $event"
+              @setInterviews="updateJob.interviews = $event"
               :selected-interviews="selectedJob.interviews"
               :update-this-job="true"
             />
@@ -139,7 +139,7 @@
           <!-- FOLLOW-UP ------------------------------------------------------------------------------------------------>
           <v-tab-item>
             <jm-follow-up
-              @setNewJobDescription="updateJob.followUp = $event"
+              @setFollowUp="updateJob.followUp = $event"
               :selected-follow-up="selectedJob.followUp"
               :update-this-job="true"
             />
@@ -198,12 +198,11 @@ export default {
       updateJob: {
         jobDescription: "",
         company: "",
-        contacts: "",
+        contacts: [],
         application: "",
-        interviews: "",
+        interviews: [],
         followUp: "",
       },
-      idJob: this.selectedJob.id,
     };
   },
   methods: {
@@ -211,8 +210,9 @@ export default {
       this.$emit("setCloseDialog", false);
     },
     async submit() {
-      const jobId = this.idJob;
-      await this.$store.dispatch("updateJobById", {
+      const jobId = this.selectedJob.id;
+      console.log(this.selectedJob.id);
+      await this.$store.dispatch("updateJob", {
         id: jobId,
         job: {
           jobDescription: this.updateJob.jobDescription,
@@ -223,7 +223,6 @@ export default {
           followUp: this.updateJob.followUp,
         },
       });
-      this.$store.commit("RESET_NEW_JOB");
     },
   },
 };

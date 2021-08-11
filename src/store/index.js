@@ -37,7 +37,7 @@ export default new Vuex.Store({
     GET_JOB_ITEMS(state, jobItems) {
       state.jobs = jobItems;
     },
-    UPDATE_JOB_ITEM_BY_ID(state, job) {
+    UPDATE_JOB_BY_ID(state, job) {
       const index = state.jobs.findIndex((s) => s.id == job.id);
       Vue.set(state.jobs, index, job);
     },
@@ -87,11 +87,12 @@ export default new Vuex.Store({
       context.commit("ADD_NEW_JOB", newJob);
       alert("new job add successfully");
     },
-    async updateJobById(context, { id, job }) {
-      const jobId = (
-        await axios.put(`http://localhost:8080/api/jobs/${id}`, job)
+    async updateJob(context, { id, job }) {
+      const jobEditing = (
+        await axios.patch(`http://localhost:8080/api/jobs/${id}`, job)
       ).data;
-      context.commit("UPDATE_JOB_ITEM_BY_ID", jobId);
+      context.commit("UPDATE_JOB_BY_ID", jobEditing);
+      alert("Job is updated successfully");
     },
   },
   modules: {},
