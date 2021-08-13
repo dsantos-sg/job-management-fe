@@ -34,7 +34,7 @@
                 :published-date="job.jobDescription.publishDate"
                 :priority="job.jobDescription.priority"
                 :rating="job.followUp.rating"
-                scheduled-interviews="NO"
+                scheduled-interviews="YES"
                 :salary-offer="job.followUp.salaryOffer"
                 overview="4"
                 :benefits="job.jobDescription.benefits"

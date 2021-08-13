@@ -15,10 +15,9 @@
 }
 
 .jm-main-background {
-  //background: radial-gradient(
-  //  ellipse at bottom,
-  //  rgb(16, 52, 96),
-  //  rgb(24, 24, 48)
+  //background: linear-gradient(
+  //                rgb(16, 32, 64),
+  //                rgb(16, 64, 128)
   //) !important;
   background-color: rgb(16, 32, 64) !important;
 }
@@ -28,8 +27,8 @@
 }
 
 .bg-blur {
-  backdrop-filter: blur(2rem) !important;
-  background-color: rgba(16, 32, 64, 0.5) !important;
+  backdrop-filter: blur(3rem) !important;
+  background-color: rgba(16, 32, 64, .5) !important;
 }
 
 .jm-light-border {

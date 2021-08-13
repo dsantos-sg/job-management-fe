@@ -89,9 +89,6 @@ export default {
     newUser() {
       this.setNewUser = !this.setNewUser;
     },
-    // loggedIn() {
-    //   this.$store.commit("SET_LOGIN");
-    // },
   },
 };
 </script>

@@ -1,78 +1,58 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col
-        sm="12"
-        md="10"
-        lg="8"
-        xl="6"
-        class="d-flex flex-column mx-auto mt-5"
-      >
-        <v-card elevation="10" rounded="xl">
-          <v-card-text class="mt-3">
-            <v-text-field
-              :value="company.companyName"
-              label="Company name"
-              outlined
-              rounded
-              clearable
-              @input="updateCompanyName"
-            ></v-text-field>
-            <v-text-field
-              :value="company.webSite"
-              label="Website"
-              outlined
-              rounded
-              clearable
-              @input="updateWebSite"
-            ></v-text-field>
-            <jm-multi-text-field-list
-              item-name="Phone"
-              @getListItems="company.phone = $event"
-            />
-            <jm-multi-text-field-list
-              item-name="Email"
-              @getListItems="company.email = $event"
-            />
-            <v-text-field
-              label="Address"
-              outlined
-              rounded
-              clearable
-            ></v-text-field>
-            <v-text-field
-              :value="company.distanceFromHome"
-              label="Distance from Home"
-              outlined
-              rounded
-              clearable
-              @input="updateDistanceFromHome"
-            ></v-text-field>
-            <v-textarea
-              :value="company.aboutUs"
-              outlined
-              clearable
-              auto-grow
-              rounded
-              rows="6"
-              label="About us"
-              @input="updateAboutUs"
-            ></v-textarea>
-            <v-textarea
-              :value="company.additionalInfos"
-              outlined
-              clearable
-              auto-grow
-              rounded
-              rows="4"
-              label="Additional infos"
-              @input="updateAdditionalInfos"
-            ></v-textarea>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-card elevation="12" rounded="xl">
+    <v-card-title>
+      <h3 class="font-weight-light mx-auto">Company</h3>
+    </v-card-title>
+    <v-card-text class="pa-sm-3 pa-md-8 pa-lg-10 pa-xl-12">
+      <v-text-field
+        v-model="compCompanyName"
+        label="Company name"
+        outlined
+        rounded
+        clearable
+      ></v-text-field>
+      <v-text-field
+        v-model="compWebSite"
+        label="Website"
+        outlined
+        rounded
+        clearable
+      ></v-text-field>
+      <jm-multi-text-field-list
+        item-name="Phone"
+        @getListItems="company.phone = $event"
+      />
+      <jm-multi-text-field-list
+        item-name="Email"
+        @getListItems="company.email = $event"
+      />
+      <v-text-field label="Address" outlined rounded clearable></v-text-field>
+      <v-text-field
+        label="Distance from Home"
+        outlined
+        rounded
+        clearable
+      ></v-text-field>
+      <v-textarea
+        v-model="compAboutUs"
+        outlined
+        clearable
+        auto-grow
+        rounded
+        rows="6"
+        label="About us"
+      ></v-textarea>
+      <v-textarea
+        v-model="compAdditionalInfos"
+        outlined
+        clearable
+        auto-grow
+        rounded
+        rows="4"
+        label="Additional infos"
+      ></v-textarea>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -80,43 +60,70 @@ import JmMultiTextFieldList from "@/components/JmMultiTextFieldList/JmMultiTextF
 
 export default {
   name: "JobCompanyForm",
-  props: ["selectedCompany", "updateThisJob"],
+  props: ["selectedJob"],
   components: { JmMultiTextFieldList },
   data() {
     return {
       company: {
-        companyName: this.selectedCompany.companyName,
-        webSite: this.selectedCompany.webSite,
+        companyName: "",
+        webSite: "",
         phone: [],
         email: [],
         geospatialData: {
           type: "Point",
           coordinates: [48.69548, 8.99777],
         },
-        distanceFromHome: this.selectedCompany.distanceFromHome,
-        aboutUs: this.selectedCompany.distanceFromHome,
-        additionalInfos: this.selectedCompany.additionalInfos,
+        distanceFromHome: "",
+        aboutUs: "",
+        additionalInfos: "",
       },
     };
+  },
+  computed: {
+    compCompanyName: {
+      get() {
+        return this.selectedJob.companyName;
+      },
+      set(val) {
+        this.company.companyName = val;
+      },
+    },
+    compWebSite: {
+      get() {
+        return this.selectedJob.webSite;
+      },
+      set(val) {
+        this.company.webSite = val;
+      },
+    },
+    compDistanceFromHome: {
+      get() {
+        return this.selectedJob.distanceFromHome;
+      },
+      set(val) {
+        this.company.distanceFromHome = val;
+      },
+    },
+    compAboutUs: {
+      get() {
+        return this.selectedJob.aboutUs;
+      },
+      set(val) {
+        this.company.aboutUs = val;
+      },
+    },
+    compAdditionalInfos: {
+      get() {
+        return this.selectedJob.additionalInfos;
+      },
+      set(val) {
+        this.company.additionalInfos = val;
+      },
+    },
   },
   methods: {
     updateWithEmit() {
       this.$emit("setCompany", this.company);
-    },
-    updateCompanyName(e) {
-      this.company.companyName = e;
-    },
-    updateWebSite(e) {
-      this.company.webSite = e;
-    },
-    updateDistanceFromHome(e) {
-      this.company.distanceFromHome = e;
-    },
-    updateAboutUs(e) {
-      this.company.aboutUs = e;
-    },
-    updateAdditionalInfos(e) {
-      this.company.additionalInfos = e;
     },
   },
   updated() {

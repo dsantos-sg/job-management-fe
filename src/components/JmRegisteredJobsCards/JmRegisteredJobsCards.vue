@@ -37,6 +37,7 @@
       :selected-job="job"
       :set-edit-item="editThisJob"
       @setCloseDialog="editThisJob = $event"
+      @cleanSelectedObject="job = $event"
     />
   </v-container>
 </template>

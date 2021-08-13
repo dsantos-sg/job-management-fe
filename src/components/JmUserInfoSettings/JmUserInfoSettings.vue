@@ -113,7 +113,6 @@
               <v-card-actions class="justify-center">
                 <v-btn
                   color="secondary"
-                  outlined
                   rounded
                   large
                   width="100"
@@ -152,7 +151,6 @@
               <v-card-actions class="justify-center">
                 <v-btn
                   color="secondary"
-                  outlined
                   rounded
                   large
                   width="100"
@@ -210,7 +208,6 @@
               <v-card-actions class="justify-center">
                 <v-btn
                   color="secondary"
-                  outlined
                   rounded
                   large
                   width="100"
@@ -251,7 +248,6 @@
                 <v-text-field
                   type="email"
                   label="Type here your email to confirm"
-                  outlined
                   clearable
                 ></v-text-field>
               </v-card-text>
@@ -259,7 +255,6 @@
               <v-card-actions class="justify-center">
                 <v-btn
                   color="secondary"
-                  outlined
                   width="100"
                   @click="closeRemoveAccount"
                   to="/"

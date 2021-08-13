@@ -23,7 +23,7 @@
           large
           width="120"
           @click="confirmEmailDialog"
-          >Reset
+          >OK
         </v-btn>
       </v-card-actions>
     </v-card>

@@ -1,89 +1,79 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col
-        sm="12"
-        md="10"
-        lg="8"
-        xl="6"
-        class="d-flex flex-column mx-auto mt-5"
+  <div>
+    <v-card
+      elevation="12"
+      rounded="xl"
+      v-for="(item, index) in contacts"
+      :key="index"
+      class="mb-8"
+    >
+      <v-card-title>
+        <v-spacer />
+        <h3 class="font-weight-light">Contact #{{ index + 1 }}</h3>
+        <v-spacer />
+        <v-btn fab plain small @click.stop="removeThisContact(index)">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </v-card-title>
+      <v-card-text class="pa-sm-3 pa-md-8 pa-lg-10 pa-xl-12">
+        <v-text-field
+          :value="contacts[index].contactFirstName"
+          label="First name"
+          outlined
+          rounded
+          clearable
+          @input="updateFirstName(index)"
+        ></v-text-field>
+        <v-text-field
+          :value="contacts[index].contactLastName"
+          label="Last name"
+          rounded
+          outlined
+          clearable
+          @input="updateLastName(index)"
+        ></v-text-field>
+        <v-text-field
+          :value="contacts[index].role"
+          label="Role"
+          rounded
+          outlined
+          clearable
+          @input="updateRole(index)"
+        ></v-text-field>
+        <jm-multi-text-field-list
+          item-name="Phone"
+          @getListItems="contacts[index].phone = $event"
+          @change="updateWithEmit"
+        />
+        <jm-multi-text-field-list
+          item-name="Email"
+          @getListItems="contacts[index].email = $event"
+          @change="updateWithEmit"
+        />
+        <v-textarea
+          :value="contacts[index].additionalInfo"
+          outlined
+          clearable
+          auto-grow
+          rounded
+          rows="4"
+          label="Additional infos"
+          @input="updateAdditionalInfos(index)"
+        ></v-textarea>
+      </v-card-text>
+    </v-card>
+    <v-card-actions class="justify-center">
+      <v-btn
+        color="secondary"
+        large
+        rounded
+        min-width="250"
+        @click="addNewContact"
       >
-        <v-card
-          elevation="10"
-          rounded="xl"
-          v-for="(item, index) in contacts"
-          :key="index"
-          class="mb-8"
-        >
-          <v-card-title>
-            <h3 class="font-weight-light">Contact #{{ index + 1 }}</h3>
-            <v-spacer />
-            <v-btn fab plain @click.stop="removeThisContact(index)">
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
-          </v-card-title>
-          <v-card-text>
-            <v-text-field
-              :value="contacts[index].contactFirstName"
-              label="First name"
-              outlined
-              rounded
-              clearable
-              @input="updateFirstName(index)"
-            ></v-text-field>
-            <v-text-field
-              :value="contacts[index].contactLastName"
-              label="Last name"
-              rounded
-              outlined
-              clearable
-              @input="updateLastName(index)"
-            ></v-text-field>
-            <v-text-field
-              :value="contacts[index].role"
-              label="Role"
-              rounded
-              outlined
-              clearable
-              @input="updateRole(index)"
-            ></v-text-field>
-            <jm-multi-text-field-list
-              item-name="Phone"
-              @getListItems="contacts[index].phone = $event"
-              @change="updateWithEmit"
-            />
-            <jm-multi-text-field-list
-              item-name="Email"
-              @getListItems="contacts[index].email = $event"
-              @change="updateWithEmit"
-            />
-            <v-textarea
-              :value="contacts[index].additionalInfo"
-              outlined
-              clearable
-              auto-grow
-              rounded
-              rows="4"
-              label="Additional infos"
-              @input="updateAdditionalInfos(index)"
-            ></v-textarea>
-          </v-card-text>
-        </v-card>
-
-        <v-card-actions class="justify-center">
-          <v-btn
-            color="secondary"
-            large
-            rounded
-            min-width="250"
-            @click="addNewContact"
-          >
-            add a new contact
-          </v-btn>
-        </v-card-actions>
-      </v-col>
-    </v-row>
-  </v-container>
+        add a new contact
+      </v-btn>
+    </v-card-actions>
+  </div>
 </template>
 
 <script>
@@ -91,7 +81,7 @@ import JmMultiTextFieldList from "@/components/JmMultiTextFieldList/JmMultiTextF
 
 export default {
   name: "JobContactForm",
-  props: ["selectedContacts", "updateThisJob"],
+  props: ["selectedJob"],
   components: { JmMultiTextFieldList },
   data() {
     return {
@@ -107,6 +97,40 @@ export default {
       ],
       dialog: false,
     };
+  },
+  computed: {
+    compFirstName: {
+      get() {
+        return this.selectedJob.contactFirstName;
+      },
+      set(val) {
+        this.contacts.additionalInfos = val;
+      },
+    },
+    compLastName: {
+      get() {
+        return this.selectedJob.additionalInfos;
+      },
+      set(val) {
+        this.company.additionalInfos = val;
+      },
+    },
+    compRole: {
+      get() {
+        return this.selectedJob.additionalInfos;
+      },
+      set(val) {
+        this.company.additionalInfos = val;
+      },
+    },
+    compAdditionalInfos: {
+      get() {
+        return this.selectedJob.additionalInfos;
+      },
+      set(val) {
+        this.company.additionalInfos = val;
+      },
+    },
   },
   methods: {
     addNewContact() {

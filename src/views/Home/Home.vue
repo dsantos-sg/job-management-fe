@@ -5,17 +5,20 @@
     </v-card-title>
     <jm-dashboard />
     <v-divider />
-    <jm-carousel-job-cards />
+    <jm-carousel-job-cards class="hidden-sm-and-down" />
+    <jm-featured-job-cards class="hidden-md-and-up" />
   </v-container>
 </template>
 
 <script>
 import JmCarouselJobCards from "@/components/JmCarouselJobCards/JmCarouselJobCards";
 import JmDashboard from "@/components/JmDashboard/JmDashboard";
+import JmFeaturedJobCards from "@/components/JmFeaturedJobCards/JmFeaturedJobCards";
 
 export default {
   name: "Home",
   components: {
+    JmFeaturedJobCards,
     JmDashboard,
     JmCarouselJobCards,
   },

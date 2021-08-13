@@ -12,21 +12,19 @@
       class="bg-blur"
     >
     </v-navigation-drawer>
-    <v-app-bar app fixed flat dense height="80" dark class="bg-blur">
-      <jm-logo logo-size="400" logo-style="dark" />
-      <v-spacer />
-      <jm-main-toolbar />
-      <v-app-bar-nav-icon
-        class="my-auto hidden-lg-and-up"
-        @click.stop="drawer = !drawer"
-      />
+    <v-app-bar app fixed flat dense height="100" dark class="bg-blur">
+      <v-container fluid class="d-flex justify-space-between mt-n5">
+        <jm-logo logo-size="400" logo-style="dark" />
+        <jm-main-toolbar />
+        <v-app-bar-nav-icon
+          class="my-auto hidden-lg-and-up"
+          @click.stop="drawer = !drawer"
+        />
+      </v-container>
       <template v-slot:extension>
-        <v-container fluid class="mt-5">
+        <v-container fluid>
           <v-row>
-            <v-col cols="8" class="d-flex justify-start">
-              <JmBreadcrumbs />
-            </v-col>
-            <v-col cols="4" class="">
+            <v-col sm="12" md="8" lg="4" xl="3" class="mx-auto">
               <JmSearchItems />
             </v-col>
           </v-row>
@@ -39,12 +37,15 @@
 <script>
 import JmLogo from "@/components/JmLogo/JmLogo";
 import JmMainToolbar from "@/components/JmMainToolbar/JmMainToolbar";
-import JmBreadcrumbs from "@/components/JmBreadcrumbs/JmBreadcrumbs";
 import JmSearchItems from "@/components/JmSearchItems/JmSearchItems";
 
 export default {
   name: "JmMainHeader",
-  components: { JmSearchItems, JmBreadcrumbs, JmMainToolbar, JmLogo },
+  components: {
+    JmSearchItems,
+    JmMainToolbar,
+    JmLogo,
+  },
   data() {
     return {
       drawer: false,
